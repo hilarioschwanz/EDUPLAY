@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EduPlay - Plataforma Educacional</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        /* HEADER */
+        .header {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #f1c40f;
+        }
+        
+        .logo small {
+            font-size: 0.7rem;
+            color: #27ae60;
+            display: block;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav a:hover, .nav a.active {
+            background: #f1c40f;
+            color: #1a1a2e;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: #f1c40f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* BANNER GRATUITO */
+        .free-banner {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 15px;
+            padding: 15px 25px;
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .free-banner h3 {
+            color: white;
+        }
+        
+        .free-banner p {
+            opacity: 0.9;
+        }
+        
+        .btn-doar {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-doar:hover {
+            background: white;
+            color: #27ae60;
+        }
+        
+        /* CARDS DE JOGOS */
+        .section-title {
+            font-size: 1.5rem;
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .game-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+        
+        .game-level {
+            background: rgba(0,0,0,0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        
+        .game-free {
+            background: #27ae60;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+        
+        /* RANKING */
+        .ranking-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .ranking-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .rank-tab {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .rank-tab:hover, .rank-tab.active {
+            background: #f1c40f;
+            color: #1a1a2e;
+        }
+        
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .ranking-table th, .ranking-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .ranking-table th {
+            color: #f1c40f;
+        }
+        
+        /* CONQUISTAS */
+        .badges-grid {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .badge {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            min-width: 100px;
+            transition: all 0.3s;
+        }
+        
+        .badge.obtido {
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            transform: scale(1.05);
+        }
+        
+        .badge.locked {
+            opacity: 0.4;
+        }
+        
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #f1c40f;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .pix-area {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+        
+        .pix-chave {
+            font-family: monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        button {
+            background: #f1c40f;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover { transform: scale(0.98); }
+        
+        input {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+        
+        /* ÁREA DO JOGO - LOCAL PARA INSERIR O CÓDIGO */
+        .jogo-area {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .voltar-btn {
+            background: #3498db;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        /* =============================================== */
+        /* ========== LOCAL PARA INSERIR O JOGO ========== */
+        /* =============================================== */
+        /* COLE O CÓDIGO COMPLETO DO SEU JOGO DENTRO DA DIV ABAIXO */
+        /* O JOGO SERÁ INSERIDO DINAMICAMENTE QUANDO O CARD FOR CLICADO */
+        
+        .game-embed {
+            width: 100%;
+            min-height: 500px;
+        }
+        
+        /* =============================================== */
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            .free-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">EDU<span>PLAY</span><small>🎓 100% GRÁTIS</small></div>
+        <div class="nav">
+            <a class="active" onclick="mostrarPagina('jogos')">🎮 Jogos</a>
+            <a onclick="mostrarPagina('ranking')">🏆 Ranking</a>
+            <a onclick="mostrarPagina('conquistas')">🏅 Conquistas</a>
+            <a onclick="mostrarPagina('biblioteca')">📚 Biblioteca</a>
+        </div>
+        <div class="user-info" onclick="abrirLogin()">
+            <div class="avatar" id="avatar">👤</div>
+            <span id="userName">Jogador</span>
+            <span id="userLevel" style="font-size:0.7rem;">🌟</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- BANNER GRATUITO -->
+        <div class="free-banner">
+            <div>
+                <h3>🎉 PLATAFORMA TOTALMENTE GRATUITA!</h3>
+                <p>Acesse todos os jogos sem custo. Divirta-se aprendendo!</p>
+            </div>
+            <button class="btn-doar" onclick="abrirDoacao()">💝 Apoie o projeto (doação voluntária)</button>
+        </div>
+        
+        <!-- PÁGINA JOGOS -->
+        <div id="pagina-jogos">
+            <div class="section-title">
+                <span>🎮</span> JOGOS DISPONÍVEIS
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card" onclick="abrirJogo('tabuada')">
+                    <div class="game-icon">⚔️</div>
+                    <div class="game-title">Batalha da Tabuada</div>
+                    <div class="game-info">
+                        <span>📚 3º ao 6º Ano</span>
+                        <span class="game-level">🔥 3 Níveis + Blitz</span>
+                        <span class="game-free">GRÁTIS</span>
+                    </div>
+                </div>
+                
+                <div class="game-card" onclick="abrirJogo('potencias')">
+                    <div class="game-icon">🧮</div>
+                    <div class="game-title">Batalha das Potências</div>
+                    <div class="game-info">
+                        <span>📚 6º Ano</span>
+                        <span class="game-level">🚧 Em breve</span>
+                        <span class="game-free">GRÁTIS</span>
+                    </div>
+                </div>
+                
+                <div class="game-card" onclick="abrirJogo('equacoes')">
+                    <div class="game-icon">📐</div>
+                    <div class="game-title">Equações em Ação</div>
+                    <div class="game-info">
+                        <span>📚 7º Ano</span>
+                        <span class="game-level">🚧 Em breve</span>
+                        <span class="game-free">GRÁTIS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ESTATÍSTICAS RÁPIDAS -->
+            <div class="ranking-container">
+                <h3>📊 SUAS ESTATÍSTICAS</h3>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+                    <div><strong>🎮 Partidas:</strong> <span id="totalPartidas">0</span></div>
+                    <div><strong>✅ Acertos:</strong> <span id="totalAcertos">0</span></div>
+                    <div><strong>⭐ Média:</strong> <span id="mediaAcertos">0</span>%</div>
+                    <div><strong>🏆 Melhor Fase:</strong> <span id="melhorFase">Nível 1</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ÁREA DO JOGO - LOCAL ONDE O JOGO SERÁ INSERIDO -->
+        <div id="jogo-container" style="display: none;">
+            <div class="jogo-area">
+                <button class="voltar-btn" onclick="fecharJogo()">◀ VOLTAR</button>
+                <div id="game-embed-container" class="game-embed">
+                    <!-- O JOGO SERÁ INSERIDO AQUI DINAMICAMENTE -->
+                    <!-- ============================================= -->
+                    <!-- ============================================= -->
+                    <!-- === COLE O CÓDIGO DO SEU JOGO ABAXO ========= -->
+                    <!-- ============================================= -->
+                    <!-- ============================================= -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- PÁGINA RANKING -->
+        <div id="pagina-ranking" style="display: none;">
+            <div class="section-title">🏆 RANKING GERAL</div>
+            <div class="ranking-container">
+                <div class="ranking-tabs">
+                    <button class="rank-tab active" onclick="filtrarRanking('todos', this)">🌍 Todos</button>
+                    <button class="rank-tab" onclick="filtrarRanking('municipio', this)">🏙️ Município</button>
+                    <button class="rank-tab" onclick="filtrarRanking('estado', this)">🏛️ Estado</button>
+                </div>
+                <div id="ranking-lista">
+                    <table class="ranking-table">
+                        <thead>
+                            <tr><th>Posição</th><th>Jogador</th><th>Escola</th><th>Pontos</th><th>Fase</th></tr>
+                        </thead>
+                        <tbody id="ranking-body"></tbody>
+                    寸
+                </div>
+            </div>
+        </div>
+        
+        <!-- PÁGINA CONQUISTAS -->
+        <div id="pagina-conquistas" style="display: none;">
+            <div class="section-title">🏅 SUAS CONQUISTAS</div>
+            <div class="ranking-container">
+                <div class="badges-grid" id="badges-grid"></div>
+            </div>
+        </div>
+        
+        <!-- PÁGINA BIBLIOTECA -->
+        <div id="pagina-biblioteca" style="display: none;">
+            <div class="section-title">📚 BIBLIOTECA DE MATERIAIS</div>
+            <div class="games-grid" id="materiais-grid"></div>
+        </div>
+        
+        <footer>
+            © 2026 EduPlay | Plataforma Educacional Gratuita | Doações voluntárias mantêm o projeto vivo
+        </footer>
+    </div>
+    
+    <!-- MODAL DOAÇÃO -->
+    <div id="doacaoModal" class="modal">
+        <div class="modal-content">
+            <h2>💝 Doe para manter o projeto</h2>
+            <p>Sua contribuição voluntária ajuda a manter a plataforma gratuita para todos!</p>
+            <div class="pix-area">
+                <strong>📱 Chave PIX:</strong>
+                <div class="pix-chave" id="pixChaveDisplay">carregando...</div>
+                <button onclick="copiarPix()">📋 Copiar Chave PIX</button>
+            </div>
+            <button onclick="fecharDoacao()" style="background:#666">FECHAR</button>
+        </div>
+    </div>
+    
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>🔐 Acessar Plataforma</h2>
+            <div style="margin: 20px 0;">
+                <input type="text" id="loginNome" placeholder="Seu nome ou apelido">
+                <input type="text" id="loginEscola" placeholder="Nome da sua escola (opcional)">
+                <button onclick="fazerLogin()" style="margin-top:10px; width:100%">▶️ ENTRAR GRATUITAMENTE</button>
+            </div>
+            <p style="font-size:0.8rem; color:#aaa;">✅ 100% gratuito - Sem necessidade de cadastro</p>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONFIGURAÇÃO INICIAL ==========
+        let jogadorAtual = null;
+        let dadosJogadores = JSON.parse(localStorage.getItem('eduplay_jogadores')) || {};
+        let rankingGeral = JSON.parse(localStorage.getItem('eduplay_ranking')) || [];
+        
+        // Ranking inicial
+        if(rankingGeral.length === 0) {
+            rankingGeral = [
+                { nome: "Ana Beatriz", escola: "EM São João", pontos: 2850, fase: "Nível 3", cidade: "São Paulo", estado: "SP" },
+                { nome: "João Pedro", escola: "Colégio Estadual", pontos: 2720, fase: "Nível 2", cidade: "Rio de Janeiro", estado: "RJ" },
+                { nome: "Maria Silva", escola: "Instituto Futuro", pontos: 2680, fase: "Modo Blitz", cidade: "Belo Horizonte", estado: "MG" },
+                { nome: "Carlos Santos", escola: "EM São João", pontos: 2450, fase: "Nível 1", cidade: "São Paulo", estado: "SP" }
+            ];
+            localStorage.setItem('eduplay_ranking', JSON.stringify(rankingGeral));
+        }
+        
+        // Conquistas
+        const conquistas = [
+            { id: 1, nome: "Primeira Vitória", icone: "🎯", descricao: "Complete sua primeira partida", condicao: (j) => (j.partidas || 0) >= 1 },
+            { id: 2, nome: "Matador de Dragões", icone: "🐉", descricao: "Zerar o Nível 3", condicao: (j) => (j.nivel3 || 0) >= 1 },
+            { id: 3, nome: "Velocidade Relâmpago", icone: "⚡", descricao: "Jogar no Modo Blitz", condicao: (j) => (j.modoBlitz || 0) >= 1 },
+            { id: 4, nome: "Mestre da Tabuada", icone: "🏆", descricao: "Acertar 100 questões", condicao: (j) => (j.totalAcertos || 0) >= 100 }
+        ];
+        
+        // Materiais
+        const materiais = [
+            { titulo: "Tabuada em PDF", autor: "Projeto EduPlay", tipo: "📄", downloads: 234 },
+            { titulo: "Jogo da Tabuada - Imprimir", autor: "Prof. Hilário", tipo: "🎲", downloads: 189 },
+            { titulo: "Dicas para aprender tabuada", autor: "Equipe EduPlay", tipo: "📝", downloads: 456 }
+        ];
+        
+        // ========== FUNÇÕES GERAIS ==========
+        function mostrarPagina(pagina) {
+            document.getElementById('pagina-jogos').style.display = pagina === 'jogos' ? 'block' : 'none';
+            document.getElementById('pagina-ranking').style.display = pagina === 'ranking' ? 'block' : 'none';
+            document.getElementById('pagina-conquistas').style.display = pagina === 'conquistas' ? 'block' : 'none';
+            document.getElementById('pagina-biblioteca').style.display = pagina === 'biblioteca' ? 'block' : 'none';
+            document.getElementById('jogo-container').style.display = 'none';
+            
+            if(pagina === 'ranking') atualizarRanking();
+            if(pagina === 'conquistas') atualizarConquistas();
+            if(pagina === 'biblioteca') atualizarBiblioteca();
+            
+            document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function abrirLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+        
+        function fazerLogin() {
+            const nome = document.getElementById('loginNome').value.trim();
+            const escola = document.getElementById('loginEscola').value.trim();
+            
+            if(!nome) {
+                alert("Digite seu nome!");
+                return;
+            }
+            
+            if(!dadosJogadores[nome]) {
+                dadosJogadores[nome] = {
+                    nome: nome,
+                    escola: escola || "Não informada",
+                    partidas: 0,
+                    totalAcertos: 0,
+                    pontuacaoTotal: 0,
+                    nivel1: 0,
+                    nivel2: 0,
+                    nivel3: 0,
+                    modoBlitz: 0,
+                    melhorFase: "Nível 1"
+                };
+                localStorage.setItem('eduplay_jogadores', JSON.stringify(dadosJogadores));
+            }
+            
+            jogadorAtual = dadosJogadores[nome];
+            atualizarInterfaceUsuario();
+            document.getElementById('loginModal').style.display = 'none';
+            alert(`🎉 Bem-vindo(a), ${nome}! Divirta-se aprendendo!`);
+        }
+        
+        function atualizarInterfaceUsuario() {
+            if(jogadorAtual) {
+                document.getElementById('userName').innerHTML = jogadorAtual.nome;
+                document.getElementById('totalPartidas').innerHTML = jogadorAtual.partidas || 0;
+                document.getElementById('totalAcertos').innerHTML = jogadorAtual.totalAcertos || 0;
+                const media = jogadorAtual.partidas ? Math.round((jogadorAtual.totalAcertos / (jogadorAtual.partidas * 5)) * 100) : 0;
+                document.getElementById('mediaAcertos').innerHTML = media;
+                document.getElementById('melhorFase').innerHTML = jogadorAtual.melhorFase || "Nível 1";
+                
+                let nivelIcone = "🌟";
+                if(media >= 90) nivelIcone = "💎";
+                else if(media >= 80) nivelIcone = "🏆";
+                else if(media >= 70) nivelIcone = "⭐";
+                document.getElementById('userLevel').innerHTML = nivelIcone;
+            }
+        }
+        
+        function salvarResultado(jogo, acertos, pontuacao, fase) {
+            if(!jogadorAtual) return;
+            
+            const j = dadosJogadores[jogadorAtual.nome];
+            j.partidas = (j.partidas || 0) + 1;
+            j.totalAcertos = (j.totalAcertos || 0) + acertos;
+            j.pontuacaoTotal = (j.pontuacaoTotal || 0) + pontuacao;
+            
+            if(fase === "Nível 1") j.nivel1 = (j.nivel1 || 0) + 1;
+            if(fase === "Nível 2") j.nivel2 = (j.nivel2 || 0) + 1;
+            if(fase === "Nível 3") j.nivel3 = (j.nivel3 || 0) + 1;
+            if(fase === "Modo Blitz") j.modoBlitz = (j.modoBlitz || 0) + 1;
+            
+            j.melhorFase = fase;
+            
+            localStorage.setItem('eduplay_jogadores', JSON.stringify(dadosJogadores));
+            jogadorAtual = j;
+            
+            // Atualizar ranking
+            const idx = rankingGeral.findIndex(r => r.nome === jogadorAtual.nome);
+            if(idx >= 0) {
+                rankingGeral[idx].pontos = j.pontuacaoTotal;
+                rankingGeral[idx].fase = j.melhorFase;
+            } else {
+                rankingGeral.push({
+                    nome: jogadorAtual.nome,
+                    escola: j.escola,
+                    pontos: j.pontuacaoTotal,
+                    fase: j.melhorFase,
+                    cidade: "Cidade",
+                    estado: "UF"
+                });
+            }
+            localStorage.setItem('eduplay_ranking', JSON.stringify(rankingGeral));
+            
+            atualizarInterfaceUsuario();
+            
+            alert(`🎉 Partida finalizada!\n✅ Acertos: ${acertos}\n⭐ Pontuação: ${pontuacao}\n🏆 Fase: ${fase}`);
+        }
+        
+        function atualizarRanking() {
+            const body = document.getElementById('ranking-body');
+            const top10 = [...rankingGeral].sort((a,b) => b.pontos - a.pontos).slice(0,10);
+            body.innerHTML = top10.map((j, idx) => `
+                <tr><td style="color:${idx===0?'#f1c40f':idx===1?'#95a5a6':idx===2?'#cd7f32':'white'}">${idx+1}º</td>
+                    <td>${j.nome}</td>
+                    <td>${j.escola}</td>
+                    <td>${j.pontos}</td>
+                    <td>${j.fase}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function filtrarRanking(tipo, btn) {
+            document.querySelectorAll('.rank-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            atualizarRanking();
+        }
+        
+        function atualizarConquistas() {
+            if(!jogadorAtual) return;
+            const grid = document.getElementById('badges-grid');
+            grid.innerHTML = conquistas.map(c => {
+                const obtida = c.condicao(jogadorAtual);
+                return `<div class="badge ${obtida ? 'obtido' : 'locked'}">
+                            <div class="badge-icon">${c.icone}</div>
+                            <div><strong>${c.nome}</strong></div>
+                            <div style="font-size:0.7rem;">${c.descricao}</div>
+                        </div>`;
+            }).join('');
+        }
+        
+        function atualizarBiblioteca() {
+            const grid = document.getElementById('materiais-grid');
+            grid.innerHTML = materiais.map(m => `
+                <div class="game-card" onclick="alert('📚 ${m.titulo}\n👤 Autor: ${m.autor}\n📥 ${m.downloads} downloads\n\nDisponível em breve!')">
+                    <div class="game-icon">${m.tipo}</div>
+                    <div class="game-title">${m.titulo}</div>
+                    <div class="game-info"><span>👤 ${m.autor}</span><span>📥 ${m.downloads}</span></div>
+                </div>
+            `).join('');
+        }
+        
+        // ========== FUNÇÕES DO JOGO ==========
+        function abrirJogo(jogoId) {
+            if(!jogadorAtual) {
+                abrirLogin();
+                return;
+            }
+            
+            // Mostrar container do jogo
+            document.getElementById('jogo-container').style.display = 'block';
+            document.getElementById('pagina-jogos').style.display = 'none';
+            document.getElementById('pagina-ranking').style.display = 'none';
+            document.getElementById('pagina-conquistas').style.display = 'none';
+            document.getElementById('pagina-biblioteca').style.display = 'none';
+            
+            // Aqui você pode inserir diferentes jogos baseado no ID
+            if(jogoId === 'tabuada') {
+                carregarJogoTabuada();
+            } else if(jogoId === 'potencias') {
+                document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center; padding:50px;"><h3>⚔️ Batalha das Potências</h3><p>Em breve!</p></div>';
+            } else if(jogoId === 'equacoes') {
+                document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center; padding:50px;"><h3>🧮 Equações em Ação</h3><p>Em breve!</p></div>';
+            }
+        }
+        
+        function carregarJogoTabuada() {
+            // ============================================================
+            // ========== COLE O CÓDIGO COMPLETO DO SEU JOGO AQUI ==========
+            // ============================================================
+            
+            const jogoHTML = `
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <!-- >>> COLE O CÓDIGO DO JOGO "BATALHA DA TABUADA" AQUI >>> -->
+                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                
+                <div style="background: #0f3460; border-radius: 20px; padding: 20px; color: white;">
+                    <div style="display:flex; justify-content: space-between; margin-bottom: 20px;">
+                        <span id="jogo-avatar" style="font-size:2rem; background:#2c3e50; padding:5px 15px; border-radius:30px;">⚔️</span>
+                        <span id="jogo-timer" style="font-size:1.5rem; background:#2c3e50; padding:5px 15px; border-radius:30px;">--s</span>
+                    </div>
+                    <div style="width:100%; background:#eee; height:15px; border-radius:10px; overflow:hidden; margin-bottom:15px;">
+                        <div id="jogo-life-bar" style="width:100%; height:100%; background:#27ae60;"></div>
+                    </div>
+                    <div id="jogo-question" style="font-size:4rem; font-weight:bold; text-align:center; margin:20px 0;">? x ?</div>
+                    <input type="number" id="jogo-answer" class="game-input" style="font-size:2rem; text-align:center; padding:10px; border-radius:10px; border:none; width:100%; max-width:200px; margin:0 auto; display:block;" placeholder="?">
+                    <button onclick="verificarRespostaJogo()" style="background:#e94560; color:white; border:none; padding:15px; border-radius:15px; font-size:1.2rem; font-weight:bold; cursor:pointer; width:100%; margin-top:15px;">⚡ ATACAR!</button>
+                    <div style="display:flex; justify-content: space-between; margin-top:15px;">
+                        <span>🎯 Acertos: <span id="jogo-acertos">0</span></span>
+                        <span>⚔️ Fase: <span id="jogo-fase">Nível 1</span></span>
+                    </div>
+                </div>
+                
+                <script>
+                    let jogoAtivo = true;
+                    let jogoVida = 100;
+                    let jogoAcertos = 0;
+                    let jogoTentativas = 0;
+                    let jogoResposta = 0;
+                    let jogoCronometro;
+                    let jogoFaseAtual = 0;
+                    
+                    const fases = [
+                        {t: 10, d: 20, nome: "Nível 1"},
+                        {t: 8, d: 25, nome: "Nível 2"},
+                        {t: 6, d: 34, nome: "Nível 3"},
+                        {t: 60, d: 0, nome: "Modo Blitz"}
+                    ];
+                    
+                    function novaPerguntaJogo() {
+                        if(!jogoAtivo) return;
+                        let n1 = Math.floor(Math.random() * 8) + 2;
+                        let n2 = Math.floor(Math.random() * 8) + 2;
+                        jogoResposta = n1 * n2;
+                        document.getElementById('jogo-question').innerHTML = n1 + " × " + n2;
+                        document.getElementById('jogo-answer').value = "";
+                        document.getElementById('jogo-answer').focus();
+                        
+                        if(jogoFaseAtual !== 3) {
+                            clearInterval(jogoCronometro);
+                            let tempoRestante = fases[jogoFaseAtual].t;
+                            document.getElementById('jogo-timer').innerHTML = tempoRestante + "s";
+                            jogoCronometro = setInterval(() => {
+                                tempoRestante--;
+                                document.getElementById('jogo-timer').innerHTML = tempoRestante + "s";
+                                if(tempoRestante <= 0) {
+                                    clearInterval(jogoCronometro);
+                                    jogoVida -= fases[jogoFaseAtual].d;
+                                    atualizarVidaJogo();
+                                    if(jogoVida <= 0) finalizarJogo();
+                                    else novaPerguntaJogo();
+                                }
+                            }, 1000);
+                        }
+                    }
+                    
+                    function atualizarVidaJogo() {
+                        document.getElementById('jogo-life-bar').style.width = Math.max(0, jogoVida) + "%";
+                    }
+                    
+                    function verificarRespostaJogo() {
+                        let respostaUsuario = parseInt(document.getElementById('jogo-answer').value);
+                        if(isNaN(respostaUsuario)) return;
+                        
+                        jogoTentativas++;
+                        if(respostaUsuario === jogoResposta) {
+                            jogoAcertos++;
+                            document.getElementById('jogo-acertos').innerHTML = jogoAcertos;
+                            canvasConfetti({ particleCount: 50, spread: 50 });
+                        } else {
+                            if(jogoFaseAtual !== 3) jogoVida -= fases[jogoFaseAtual].d;
+                            atualizarVidaJogo();
+                        }
+                        
+                        if(jogoFaseAtual !== 3 && (jogoVida <= 0 || jogoTentativas >= 20)) {
+                            finalizarJogo();
+                        } else {
+                            novaPerguntaJogo();
+                        }
+                    }
+                    
+                    function finalizarJogo() {
+                        jogoAtivo = false;
+                        clearInterval(jogoCronometro);
+                        const eficiencia = Math.round((jogoAcertos / jogoTentativas) * 100) || 0;
+                        const nomeFase = fases[jogoFaseAtual].nome;
+                        const pontuacao = jogoAcertos * 10;
+                        
+                        if(jogoVida > 0 && jogoFaseAtual < 3) {
+                            jogoFaseAtual++;
+                            jogoVida = 100;
+                            jogoAcertos = 0;
+                            jogoTentativas = 0;
+                            document.getElementById('jogo-fase').innerHTML = fases[jogoFaseAtual].nome;
+                            document.getElementById('jogo-acertos').innerHTML = "0";
+                            atualizarVidaJogo();
+                            novaPerguntaJogo();
+                        } else {
+                            // Salvar resultado
+                            if(window.parent && window.parent.salvarResultado) {
+                                window.parent.salvarResultado('tabuada', jogoAcertos, pontuacao, nomeFase);
+                            }
+                            if(window.parent && window.parent.fecharJogo) {
+                                window.parent.fecharJogo();
+                            } else {
+                                alert(\`🎉 Partida finalizada!\\n✅ Acertos: \${jogoAcertos}\\n⭐ Pontuação: \${pontuacao}\\n🏆 Fase: \${nomeFase}\`);
+                                window.parent.document.getElementById('jogo-container').style.display = 'none';
+                                window.parent.mostrarPagina('jogos');
+                            }
+                        }
+                    }
+                    
+                    window.verificarRespostaJogo = verificarRespostaJogo;
+                    novaPerguntaJogo();
+                <\/script>
+            `;
+            
+            document.getElementById('game-embed-container').innerHTML = jogoHTML;
+        }
+        
+        function fecharJogo() {
+            document.getElementById('jogo-container').style.display = 'none';
+            mostrarPagina('jogos');
+        }
+        
+        // ========== DOAÇÃO ==========
+        let pixConfig = JSON.parse(localStorage.getItem('pixConfigEduPlay')) || { tipo: "Email", chave: "eduplay@plataforma.com", nome: "Projeto EduPlay" };
+        
+        function abrirDoacao() {
+            document.getElementById('pixChaveDisplay').innerHTML = `${pixConfig.tipo}: ${pixConfig.chave}<br>(${pixConfig.nome})`;
+            document.getElementById('doacaoModal').style.display = 'flex';
+        }
+        
+        function fecharDoacao() {
+            document.getElementById('doacaoModal').style.display = 'none';
+        }
+        
+        function copiarPix() {
+            navigator.clipboard.writeText(pixConfig.chave);
+            alert("Chave PIX copiada! ✅");
+        }
+        
+        window.onload = () => {
+            mostrarPagina('jogos');
+        };
+    </script>
+</body>
+</html>
