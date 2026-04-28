@@ -354,7 +354,323 @@
             margin-bottom: 15px;
             display: inline-block;
         }
+        <!-- ============================================ -->
+<!-- JOGO MATEMÁTICA 7º ANO - SAEB                -->
+<!-- ============================================ -->
+<!-- COLE ESTE CÓDIGO DENTRO DA DIV game-embed-container -->
+
+<div id="jogo7ano-container" style="background: white; border-radius: 30px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;">
+    <div class="header" style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <div class="badge badge-level" style="background: #2c3e50; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="levelDisplay7">📚 Nível 1</div>
+        <div class="badge badge-score" style="background: #f1c40f; color: #333; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="scoreDisplay7">⭐ 0 pts</div>
+        <div class="badge badge-streak" style="background: #e74c3c; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="streakDisplay7">🔥 0</div>
+    </div>
+    
+    <div class="progress-area" style="margin-bottom: 20px;">
+        <div class="progress-bar" style="width: 100%; height: 10px; background: #eee; border-radius: 10px; overflow: hidden;">
+            <div class="progress-fill" style="height: 100%; background: #27ae60; transition: width 0.5s; width: 0%;" id="progressFill7"></div>
+        </div>
+        <div style="font-size: 0.8rem; margin-top: 5px; color: #666;" id="progressText7">Questão 1 de 10</div>
+    </div>
+    
+    <div class="lives" style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;" id="livesContainer7">❤️ ❤️ ❤️</div>
+    
+    <div class="question-box" style="background: #f8f9fa; border-radius: 20px; padding: 25px; margin-bottom: 20px;">
+        <div class="question-text" style="font-size: 1.2rem; color: #333; margin-bottom: 20px; font-weight: 600;" id="questionText7">Carregando...</div>
+        <div class="options" style="display: flex; flex-direction: column; gap: 12px;" id="optionsContainer7"></div>
+    </div>
+    
+    <button class="btn-next" style="background: #27ae60; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="nextBtn7" disabled>▶ PRÓXIMA</button>
+    <button class="btn-restart" style="background: #3498db; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" onclick="reiniciarJogo7()">🔄 RECOMEÇAR JOGO</button>
+</div>
+
+<script>
+    // ========== BANCO DE QUESTÕES (7º ANO - BNCC) ==========
+    const bancoQuestoes7 = {
+        1: [
+            { texto: "O resultado de (-8) + (-12) é:", a: "-20", b: "-4", c: "4", d: "20", correta: "a" },
+            { texto: "Qual é o valor de (-3) × (-7)?", a: "-21", b: "-10", c: "10", d: "21", correta: "d" },
+            { texto: "Resolva a expressão: 5 - 2 × 3 = ?", a: "-1", b: "1", c: "3", d: "9", correta: "a" },
+            { texto: "O resultado de (-15) ÷ (+3) é:", a: "-5", b: "-3", c: "3", d: "5", correta: "a" },
+            { texto: "Qual é o valor absoluto de |-9|?", a: "-9", b: "0", c: "9", d: "18", correta: "c" },
+            { texto: "Resolva: 2³ × 2² = ?", a: "2⁵", b: "2⁶", c: "4⁵", d: "4⁶", correta: "a" },
+            { texto: "A fração 2/5 em porcentagem é:", a: "20%", b: "25%", c: "40%", d: "50%", correta: "c" },
+            { texto: "Qual é o oposto de -12?", a: "-12", b: "0", c: "12", d: "24", correta: "c" },
+            { texto: "Resolva: 10 - (4 + 3) × 2 = ?", a: "-4", b: "0", c: "4", d: "6", correta: "a" },
+            { texto: "O valor de 3/4 de 80 é:", a: "20", b: "40", c: "60", d: "80", correta: "c" }
+        ],
+        2: [
+            { texto: "Resolva a equação: 3x + 7 = 22", a: "3", b: "4", c: "5", d: "6", correta: "c" },
+            { texto: "Se 2x - 5 = 9, então x vale:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
+            { texto: "O conjunto solução de x + 8 < 15 é:", a: "x < 5", b: "x < 7", c: "x < 8", d: "x < 23", correta: "b" },
+            { texto: "Qual é a raiz da equação 5x = 45?", a: "7", b: "8", c: "9", d: "10", correta: "c" },
+            { texto: "Resolva: 2x - 3 = x + 5", a: "6", b: "7", c: "8", d: "9", correta: "c" },
+            { texto: "O valor de x em 4(x - 2) = 20 é:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
+            { texto: "Qual é a solução da inequação 2x ≥ 10?", a: "x ≥ 3", b: "x ≥ 5", c: "x ≤ 5", d: "x ≤ 3", correta: "b" },
+            { texto: "O perímetro de um quadrado de lado x é 20 cm. Qual o valor de x?", a: "3 cm", b: "4 cm", c: "5 cm", d: "6 cm", correta: "c" },
+            { texto: "A idade de Pedro é o dobro da idade de Ana. A soma das idades é 36. Qual a idade de Ana?", a: "10", b: "12", c: "14", d: "16", correta: "b" },
+            { texto: "Resolva: 3x + 2 = 2x + 7", a: "3", b: "4", c: "5", d: "6", correta: "c" }
+        ],
+        3: [
+            { texto: "A forma decimal de 3/8 é:", a: "0,25", b: "0,3", c: "0,325", d: "0,375", correta: "d" },
+            { texto: "25% de 120 é igual a:", a: "20", b: "25", c: "30", d: "35", correta: "c" },
+            { texto: "Em uma classe com 40 alunos, 15 são meninas. Qual a porcentagem de meninos?", a: "37,5%", b: "52,5%", c: "62,5%", d: "67,5%", correta: "c" },
+            { texto: "Um produto custa R$ 80,00 e teve um aumento de 15%. Qual o novo preço?", a: "R$ 88", b: "R$ 90", c: "R$ 92", d: "R$ 95", correta: "c" },
+            { texto: "A fração 3/5 corresponde a qual porcentagem?", a: "30%", b: "45%", c: "60%", d: "75%", correta: "c" },
+            { texto: "Na forma de fração irredutível, 0,625 é igual a:", a: "5/8", b: "3/4", c: "2/3", d: "7/8", correta: "a" },
+            { texto: "Aprovado: 18 alunos de uma turma de 30. Qual o percentual de aprovação?", a: "50%", b: "60%", c: "70%", d: "80%", correta: "b" },
+            { texto: "O número 0,333... em fração é:", a: "1/2", b: "1/3", c: "2/3", d: "3/4", correta: "b" },
+            { texto: "Em uma promoção, um produto de R$ 200,00 teve desconto de 20%. Quanto paguei?", a: "R$ 140", b: "R$ 150", c: "R$ 160", d: "R$ 170", correta: "c" },
+            { texto: "A forma percentual de 35/100 é:", a: "3,5%", b: "35%", c: "65%", d: "70%", correta: "b" }
+        ],
+        4: [
+            { texto: "Se a = 3 e b = -2, qual o valor de a² + b²?", a: "5", b: "9", c: "11", d: "13", correta: "d" },
+            { texto: "Qual o valor numérico de 2x - 3y para x = 4 e y = -1?", a: "5", b: "8", c: "11", d: "14", correta: "c" },
+            { texto: "A área de um retângulo de base 8 cm e altura x cm é 56 cm². Qual o valor de x?", a: "5 cm", b: "6 cm", c: "7 cm", d: "8 cm", correta: "c" },
+            { texto: "O volume de um cubo de aresta a = 5 cm é:", a: "25 cm³", b: "75 cm³", c: "100 cm³", d: "125 cm³", correta: "d" },
+            { texto: "O perímetro de um triângulo equilátero de lado 12 cm é:", a: "24 cm", b: "36 cm", c: "48 cm", d: "60 cm", correta: "b" },
+            { texto: "A expressão (x + y)² é igual a:", a: "x² + y²", b: "x² + 2xy + y²", c: "x² + xy + y²", d: "2x + 2y", correta: "b" },
+            { texto: "Se um quadrado tem área 64 cm², seu perímetro é:", a: "24 cm", b: "28 cm", c: "32 cm", d: "36 cm", correta: "c" },
+            { texto: "O diâmetro de uma circunferência de raio 7 cm é:", a: "7 cm", b: "14 cm", c: "21 cm", d: "28 cm", correta: "b" },
+            { texto: "A área de um círculo de raio 5 cm (π = 3,14) é:", a: "31,4 cm²", b: "62,8 cm²", c: "78,5 cm²", d: "94,2 cm²", correta: "c" },
+            { texto: "O valor de 2³ + 3² é:", a: "13", b: "15", c: "17", d: "19", correta: "c" }
+        ],
+        5: [
+            { texto: "Qual desses números é racional?", a: "√2", b: "π", c: "0,333...", d: "√3", correta: "c" },
+            { texto: "A √16 + √9 é igual a:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
+            { texto: "O valor aproximado de √10 é:", a: "3,1", b: "3,2", c: "3,3", d: "3,4", correta: "a" },
+            { texto: "Colocando em ordem crescente: 2,3 ; 2,03 ; 2,003 ; 2,33", a: "2,003;2,03;2,3;2,33", b: "2,03;2,003;2,3;2,33", c: "2,33;2,3;2,03;2,003", d: "2,003;2,03;2,33;2,3", correta: "a" },
+            { texto: "A √64 - √36 é igual a:", a: "2", b: "3", c: "4", d: "5", correta: "a" },
+            { texto: "Entre 5 e 6 existe o número irracional:", a: "5,5", b: "5,25", c: "√30", d: "5,75", correta: "c" },
+            { texto: "O valor de 0,999... é igual a:", a: "0,9", b: "0,99", c: "0,999", d: "1", correta: "d" },
+            { texto: "A √49 + √64 vale:", a: "13", b: "14", c: "15", d: "16", correta: "c" },
+            { texto: "O número √2 é classificado como:", a: "Natural", b: "Inteiro", c: "Racional", d: "Irracional", correta: "d" },
+            { texto: "A √81 + √25 - √16 = ?", a: "8", b: "10", c: "12", d: "14", correta: "c" }
+        ]
+    };
+    
+    // Níveis 6-10
+    for(let n = 6; n <= 10; n++) {
+        bancoQuestoes7[n] = [];
+        for(let i = 1; i <= 20; i++) {
+            bancoQuestoes7[n].push({
+                texto: `Desafio ${i} do Nível ${n}`,
+                a: `Opção A${i}`, b: `Opção B${i}`, c: `Opção C${i}`, d: `Opção D${i}`,
+                correta: ["a","b","c","d"][Math.floor(Math.random() * 4)]
+            });
+        }
+    }
+    
+    // ========== EMBARALHAMENTO ==========
+    function embaralhar7(array) {
+        for(let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    // ========== VARIÁVEIS DO JOGO ==========
+    let nivelAtual7 = 1;
+    let questoesNivel7 = [];
+    let indiceQuestao7 = 0;
+    let pontuacao7 = 0;
+    let sequencia7 = 0;
+    let vidas7 = 3;
+    let alternativaSelecionada7 = null;
+    let processando7 = false;
+    let nomeJogador7 = prompt("Digite seu nome para começar:") || "Jogador";
+    let acertosNivel7 = 0;
+    let totalQuestoesNivel7 = 0;
+    
+    // ========== FUNÇÕES DO JOGO ==========
+    function carregarNivel7(nivel) {
+        nivelAtual7 = nivel;
+        acertosNivel7 = 0;
+        let banco = bancoQuestoes7[nivel] || [];
+        const bancoEmbaralhado = embaralhar7([...banco]);
+        questoesNivel7 = bancoEmbaralhado.slice(0, 10);
+        totalQuestoesNivel7 = questoesNivel7.length;
+        indiceQuestao7 = 0;
+        vidas7 = 3;
+        sequencia7 = 0;
+        alternativaSelecionada7 = null;
+        processando7 = false;
+        atualizarUI7();
+        carregarQuestao7();
+    }
+    
+    function carregarQuestao7() {
+        if(indiceQuestao7 >= questoesNivel7.length) {
+            if(nivelAtual7 < 10) {
+                carregarNivel7(nivelAtual7 + 1);
+            } else {
+                finalizarJogo7(true);
+            }
+            return;
+        }
         
+        const q = questoesNivel7[indiceQuestao7];
+        document.getElementById('questionText7').innerHTML = q.texto;
+        
+        const container = document.getElementById('optionsContainer7');
+        container.innerHTML = `
+            <div class="option" data-letra="a" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
+                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.a}</div>
+            </div>
+            <div class="option" data-letra="b" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">B</div>
+                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.b}</div>
+            </div>
+            <div class="option" data-letra="c" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">C</div>
+                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.c}</div>
+            </div>
+            <div class="option" data-letra="d" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">D</div>
+                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.d}</div>
+            </div>
+        `;
+        
+        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+            opt.onclick = () => selecionarAlternativa7(opt);
+        });
+        
+        alternativaSelecionada7 = null;
+        processando7 = false;
+        
+        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+            opt.classList.remove('selected', 'disabled', 'correct-show', 'wrong-show');
+        });
+        
+        document.getElementById('nextBtn7').disabled = true;
+        
+        const progresso = (indiceQuestao7 / questoesNivel7.length) * 100;
+        document.getElementById('progressFill7').style.width = progresso + "%";
+        document.getElementById('progressText7').innerHTML = `Questão ${indiceQuestao7 + 1} de ${questoesNivel7.length}`;
+    }
+    
+    function selecionarAlternativa7(opt) {
+        if(processando7) return;
+        if(alternativaSelecionada7) {
+            alternativaSelecionada7.classList.remove('selected');
+        }
+        alternativaSelecionada7 = opt;
+        opt.classList.add('selected');
+        document.getElementById('nextBtn7').disabled = false;
+    }
+    
+    function proximaQuestao7() {
+        if(processando7) return;
+        if(!alternativaSelecionada7) return;
+        
+        processando7 = true;
+        
+        const q = questoesNivel7[indiceQuestao7];
+        const letraSelecionada = alternativaSelecionada7.getAttribute('data-letra');
+        const acertou = (letraSelecionada === q.correta);
+        
+        let textoCorreto = "";
+        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+            if(opt.getAttribute('data-letra') === q.correta) {
+                textoCorreto = opt.querySelector('.option-text').innerHTML;
+            }
+        });
+        
+        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+            opt.classList.add('disabled');
+            if(opt.getAttribute('data-letra') === q.correta) {
+                opt.classList.add('correct-show');
+            }
+            if(opt === alternativaSelecionada7 && !acertou) {
+                opt.classList.add('wrong-show');
+            }
+        });
+        
+        if(acertou) {
+            acertosNivel7++;
+            sequencia7++;
+            const pontos = 10 + (sequencia7 * 2);
+            pontuacao7 += pontos;
+            mostrarFeedback7(`✅ ACERTOU! +${pontos} pontos!`, "#27ae60");
+            canvasConfetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        } else {
+            sequencia7 = 0;
+            vidas7--;
+            atualizarVidas7();
+            mostrarFeedback7(`❌ ERROU! Resposta: ${q.correta.toUpperCase()}) ${textoCorreto}`, "#e74c3c");
+            
+            if(vidas7 <= 0) {
+                setTimeout(() => finalizarJogo7(false), 2000);
+                return;
+            }
+        }
+        
+        atualizarUI7();
+        
+        setTimeout(() => {
+            indiceQuestao7++;
+            processando7 = false;
+            carregarQuestao7();
+        }, 2500);
+    }
+    
+    function atualizarUI7() {
+        document.getElementById('levelDisplay7').innerHTML = `📚 Nível ${nivelAtual7}`;
+        document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
+        document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
+        atualizarVidas7();
+    }
+    
+    function atualizarVidas7() {
+        const container = document.getElementById('livesContainer7');
+        let hearts = '';
+        for(let i = 0; i < 3; i++) {
+            hearts += `<span class="heart ${i >= vidas7 ? 'lost' : ''}" style="font-size: 1.8rem;">${i < vidas7 ? '❤️' : '🖤'}</span>`;
+        }
+        container.innerHTML = hearts;
+    }
+    
+    function mostrarFeedback7(msg, cor) {
+        const div = document.createElement('div');
+        div.style.cssText = `
+            position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+            background: ${cor}; color: white; padding: 15px 25px;
+            border-radius: 25px; z-index: 2000; font-weight: bold;
+            font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        `;
+        div.innerHTML = msg;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 2500);
+    }
+    
+    function finalizarJogo7(completou) {
+        if(completou) {
+            alert(`🎉 PARABÉNS! 🎉\nVocê completou todos os 10 níveis!\nPontuação final: ${pontuacao7} pontos`);
+        } else {
+            alert(`💀 GAME OVER 💀\nVocê não passou do Nível ${nivelAtual7}!\nPontuação final: ${pontuacao7} pontos`);
+        }
+        if(window.parent && window.parent.fecharJogo) {
+            window.parent.fecharJogo();
+        } else {
+            location.reload();
+        }
+    }
+    
+    function reiniciarJogo7() {
+        nivelAtual7 = 1;
+        pontuacao7 = 0;
+        sequencia7 = 0;
+        carregarNivel7(1);
+    }
+    
+    // Configurar botão próximo
+    document.getElementById('nextBtn7').onclick = proximaQuestao7;
+    
+    // Iniciar jogo
+    carregarNivel7(1);
+</script>
         /* =============================================== */
         /* ========== LOCAL PARA INSERIR O JOGO ========== */
         /* =============================================== */
