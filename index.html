@@ -386,7 +386,7 @@
                 <table class="ranking-table">
                     <thead><tr><th>Posição</th><th>Jogador</th><th>Escola</th><th>Pontos</th></tr></thead>
                     <tbody id="ranking-body"></tbody>
-                </table>
+                寸
             </div>
         </div>
         
@@ -470,7 +470,11 @@
         function atualizarRanking() {
             const body = document.getElementById('ranking-body');
             body.innerHTML = rankingGeral.sort((a,b)=>b.pontos-a.pontos).slice(0,10).map((j,idx)=>`
-                <tr><td>${idx+1}º</td><td>${j.nome}</td><td>${j.escola}</td><td>${j.pontos}</td></tr>
+                <tr><td style="color:${idx===0?'#f1c40f':idx===1?'#95a5a6':idx===2?'#cd7f32':'white'}">${idx+1}º</td>
+                <td>${j.nome}</td>
+                <td>${j.escola}</td>
+                <td>${j.pontos}</td>
+                </tr>
             `).join('');
         }
         
@@ -489,866 +493,18 @@
             document.getElementById('pagina-biblioteca').style.display = 'none';
             
             if(jogoId === '7ano') carregarJogo7ano();
-            else if(jogoId === 'tabuada') document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;"><h3>⚔️ Batalha da Tabuada</h3><p>Em breve!</p></div>';
-            else document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;"><h3>📚 Em desenvolvimento</h3><p>Em breve!</p></div>';
+            else if(jogoId === 'tabuada') document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;background:white;border-radius:20px;"><h3>⚔️ Batalha da Tabuada</h3><p>Em breve!</p></div>';
+            else document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;background:white;border-radius:20px;"><h3>📚 Em desenvolvimento</h3><p>Em breve!</p></div>';
         }
         
         function fecharJogo() {
             document.getElementById('jogo-container').style.display = 'none';
             mostrarPagina('jogos');
         }
-        <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Matemática 6º Ano - Jogo SAEB</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
-        body {
-            font-family: 'Segoe UI', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .pagina {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        /* BOTÃO DE DOAÇÃO */
-        .doacao-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .btn-doar {
-            background: linear-gradient(135deg, #f1c40f, #e67e22);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .btn-doar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-        
-        /* ÁREA DO JOGO + RANKING */
-        .game-area {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        /* CARD DO JOGO */
-        .game-card {
-            background: white;
-            border-radius: 30px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .badge {
-            padding: 8px 15px;
-            border-radius: 25px;
-            font-weight: bold;
-        }
-        .badge-level { background: #2c3e50; color: white; }
-        .badge-score { background: #f1c40f; color: #333; }
-        .badge-streak { background: #e74c3c; color: white; }
-        
-        .progress-area { margin-bottom: 20px; }
-        .progress-bar { width: 100%; height: 10px; background: #eee; border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: #27ae60; transition: width 0.5s; width: 0%; }
-        .progress-text { font-size: 0.8rem; margin-top: 5px; color: #666; }
-        
-        .question-box {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        
-        .question-text {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .option {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s;
-        }
-        
-        .option:hover { border-color: #3498db; transform: scale(1.02); }
-        
-        .option-letter {
-            width: 40px;
-            height: 40px;
-            background: #2c3e50;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .option-text { flex: 1; text-align: left; color: #333; }
-        
-        .option.selected {
-            background: #3498db;
-            border-color: #3498db;
-        }
-        .option.selected .option-text { color: white; }
-        .option.selected .option-letter { background: white; color: #3498db; }
-        
-        .option.disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        
-        .option.correct-show {
-            background: #27ae60;
-            border-color: #27ae60;
-        }
-        .option.correct-show .option-text { color: white; }
-        .option.correct-show .option-letter { background: white; color: #27ae60; }
-        
-        .option.wrong-show {
-            background: #e74c3c;
-            border-color: #e74c3c;
-        }
-        .option.wrong-show .option-text { color: white; }
-        .option.wrong-show .option-letter { background: white; color: #e74c3c; }
-        
-        .lives {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .heart { font-size: 1.8rem; }
-        .heart.lost { opacity: 0.3; filter: grayscale(1); }
-        
-        button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 15px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: transform 0.2s;
-        }
-        button:hover { transform: scale(0.98); }
-        .btn-next { background: #27ae60; color: white; }
-        .btn-next:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-restart { background: #3498db; color: white; }
-        
-        /* RANKING POR NÍVEL */
-        .ranking-nivel {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .ranking-nivel h3 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .tabs-ranking {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .tab-btn {
-            background: #ecf0f1;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 0;
-            width: auto;
-        }
-        
-        .tab-btn:hover { transform: scale(1.05); background: #d5dbdb; }
-        .tab-btn.ativo { background: #2c3e50; color: white; }
-        
-        .ranking-conteudo {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .rank-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            transition: background 0.3s;
-        }
-        
-        .rank-item:hover { background: #f8f9fa; }
-        
-        .rank-posicao {
-            font-weight: bold;
-            width: 45px;
-            color: #2c3e50;
-        }
-        
-        .rank-nome {
-            flex: 2;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .rank-pontos {
-            font-weight: bold;
-            color: #27ae60;
-        }
-        
-        .rank-acertos {
-            font-size: 0.8rem;
-            color: #666;
-            margin-left: 10px;
-        }
-        
-        .sem-dados {
-            text-align: center;
-            color: #999;
-            padding: 20px;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 30px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .pix-area {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 15px 0;
-            word-break: break-all;
-        }
-        
-        .pix-chave {
-            font-family: monospace;
-            font-size: 1rem;
-            background: #e9ecef;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-        
-        .btn-copiar {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        
-        .admin-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .admin-form input, .admin-form select {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.75rem;
-            cursor: pointer;
-            padding: 15px;
-        }
-        
-        footer:hover {
-            color: rgba(255,255,255,0.9);
-        }
-    </style>
-</head>
-<body>
-    <div class="pagina">
-        <!-- BOTÃO DE DOAÇÃO -->
-        <div class="doacao-container">
-            <button class="btn-doar" onclick="abrirDoacao()">
-                💝 APOIAR PROJETO
-            </button>
-        </div>
-        
-        <div class="container">
-            <!-- ÁREA DO JOGO + RANKING -->
-            <div class="game-area">
-                <!-- JOGO -->
-                <div class="game-card">
-                    <div class="header">
-                        <div class="badge badge-level" id="levelDisplay">📚 Nível 1</div>
-                        <div class="badge badge-score" id="scoreDisplay">⭐ 0 pts</div>
-                        <div class="badge badge-streak" id="streakDisplay">🔥 0</div>
-                    </div>
-                    
-                    <div class="progress-area">
-                        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-                        <div class="progress-text" id="progressText">Questão 1 de 10</div>
-                    </div>
-                    
-                    <div class="lives" id="livesContainer">❤️ ❤️ ❤️</div>
-                    
-                    <div class="question-box">
-                        <div class="question-text" id="questionText">Carregando...</div>
-                        <div class="options" id="optionsContainer"></div>
-                    </div>
-                    
-                    <button class="btn-next" id="nextBtn" onclick="proximaQuestao()" disabled>▶ PRÓXIMA</button>
-                    <button class="btn-restart" onclick="reiniciarJogo()">🔄 RECOMEÇAR JOGO</button>
-                </div>
-                
-                <!-- RANKING POR NÍVEL -->
-                <div class="ranking-nivel">
-                    <h3>🏆 RANKING POR NÍVEL 🏆</h3>
-                    <div class="tabs-ranking">
-                        <button class="tab-btn" onclick="mostrarRankingNivel(1, this)">Nível 1</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(2, this)">Nível 2</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(3, this)">Nível 3</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(4, this)">Nível 4</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(5, this)">Nível 5</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(6, this)">Nível 6</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(7, this)">Nível 7</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(8, this)">Nível 8</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(9, this)">Nível 9</button>
-                        <button class="tab-btn" onclick="mostrarRankingNivel(10, this)">Nível 10</button>
-                    </div>
-                    <div class="ranking-conteudo" id="rankingConteudo">
-                        <div class="sem-dados">🎯 Selecione um nível</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <footer onclick="abrirAdmin()">© 2026 | Configurações do Sistema</footer>
-    </div>
-    
-    <!-- MODAL GAME OVER -->
-    <div id="gameoverModal" class="modal">
-        <div class="modal-content">
-            <h2 id="gameoverTitle">🎉 PARABÉNS!</h2>
-            <p id="gameoverText"></p>
-            <p id="gameoverStats"></p>
-            <button onclick="reiniciarJogo()">JOGAR NOVAMENTE</button>
-        </div>
-    </div>
-    
-    <!-- MODAL DOAÇÃO -->
-    <div id="doacaoModal" class="modal">
-        <div class="modal-content">
-            <h2>💝 Apoie o Projeto</h2>
-            <p>Sua contribuição ajuda a manter este jogo gratuito e em constante melhoria!</p>
-            <div class="pix-area">
-                <strong>📱 Chave PIX:</strong>
-                <div class="pix-chave" id="pixChaveDisplay">carregando...</div>
-                <button class="btn-copiar" onclick="copiarPix()">📋 Copiar Chave PIX</button>
-            </div>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Após a doação, o código será validado automaticamente.</p>
-            <button onclick="fecharDoacao()" style="background: #666;">FECHAR</button>
-        </div>
-    </div>
-    
-    <!-- MODAL ADMIN PIX -->
-    <div id="adminPixModal" class="modal">
-        <div class="modal-content">
-            <h2>🔧 Configurar Chave PIX</h2>
-            <div class="admin-form">
-                <label>Tipo da Chave:</label>
-                <select id="pixTipo">
-                    <option value="CPF">CPF</option>
-                    <option value="CNPJ">CNPJ</option>
-                    <option value="Email">E-mail</option>
-                    <option value="Telefone">Telefone</option>
-                    <option value="Aleatória">Chave Aleatória</option>
-                </select>
-                <label>Chave PIX:</label>
-                <input type="text" id="pixChave" placeholder="Digite a chave PIX">
-                <label>Nome do Beneficiário (opcional):</label>
-                <input type="text" id="pixNome" placeholder="Nome do beneficiário">
-                <button onclick="salvarPix()">💾 SALVAR CHAVE PIX</button>
-                <button onclick="fecharAdminPix()" style="background:#666">FECHAR</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ========== CONFIGURAÇÃO PIX ==========
-        let pixConfig = JSON.parse(localStorage.getItem('pixConfig')) || {
-            tipo: "Email",
-            chave: "contato@matematica.com",
-            nome: "Projeto Matemática"
-        };
-        
-        function salvarPix() {
-            pixConfig = {
-                tipo: document.getElementById('pixTipo').value,
-                chave: document.getElementById('pixChave').value,
-                nome: document.getElementById('pixNome').value
-            };
-            localStorage.setItem('pixConfig', JSON.stringify(pixConfig));
-            alert("Chave PIX salva com sucesso!");
-            fecharAdminPix();
-        }
-        
-        function abrirDoacao() {
-            const chaveDisplay = document.getElementById('pixChaveDisplay');
-            chaveDisplay.innerHTML = `${pixConfig.tipo}: ${pixConfig.chave}<br>${pixConfig.nome ? `(${pixConfig.nome})` : ''}`;
-            document.getElementById('doacaoModal').style.display = 'flex';
-        }
-        
-        function fecharDoacao() {
-            document.getElementById('doacaoModal').style.display = 'none';
-        }
-        
-        function copiarPix() {
-            navigator.clipboard.writeText(pixConfig.chave);
-            alert("Chave PIX copiada! ✅\n\n" + pixConfig.chave);
-        }
-        
-        function abrirAdminPix() {
-            document.getElementById('pixTipo').value = pixConfig.tipo;
-            document.getElementById('pixChave').value = pixConfig.chave;
-            document.getElementById('pixNome').value = pixConfig.nome || '';
-            document.getElementById('adminPixModal').style.display = 'flex';
-        }
-        
-        function fecharAdminPix() {
-            document.getElementById('adminPixModal').style.display = 'none';
-        }
-        
-        // ========== BANCO DE QUESTÕES ==========
-        const bancoQuestoes = {
-            1: [
-                { texto: "25 + 37 = ?", a: "52", b: "62", c: "72", d: "82", correta: "b" },
-                { texto: "8 × 7 = ?", a: "48", b: "56", c: "64", d: "72", correta: "b" },
-                { texto: "O dobro de 15 é:", a: "25", b: "30", c: "35", d: "40", correta: "b" },
-                { texto: "3² é igual a:", a: "6", b: "8", c: "9", d: "12", correta: "c" },
-                { texto: "10 - 4 × 2 = ?", a: "12", b: "8", c: "2", d: "6", correta: "c" },
-                { texto: "A metade de 50 é:", a: "20", b: "25", c: "30", d: "35", correta: "b" },
-                { texto: "Qual o sucessor de 199?", a: "198", b: "200", c: "201", d: "210", correta: "b" },
-                { texto: "1000 ÷ 10 = ?", a: "10", b: "100", c: "1000", d: "1", correta: "b" },
-                { texto: "Uma dúzia equivale a:", a: "10", b: "11", c: "12", d: "13", correta: "c" },
-                { texto: "5 × 0 = ?", a: "0", b: "5", c: "10", d: "1", correta: "a" }
-            ],
-            2: [
-                { texto: "144 ÷ 12 = ?", a: "10", b: "11", c: "12", d: "13", correta: "c" },
-                { texto: "2³ + 3² = ?", a: "13", b: "15", c: "17", d: "19", correta: "c" },
-                { texto: "Raiz quadrada de 64 é:", a: "6", b: "7", c: "8", d: "9", correta: "c" },
-                { texto: "35% de 200 = ?", a: "50", b: "60", c: "70", d: "80", correta: "c" },
-                { texto: "MMC de 4 e 6 é:", a: "8", b: "10", c: "12", d: "14", correta: "c" },
-                { texto: "Área do quadrado de lado 7cm:", a: "28cm²", b: "42cm²", c: "49cm²", d: "56cm²", correta: "c" },
-                { texto: "2/5 em decimal é:", a: "0,2", b: "0,25", c: "0,4", d: "0,5", correta: "c" },
-                { texto: "50 + 30 × 2 = ?", a: "110", b: "130", c: "160", d: "100", correta: "a" },
-                { texto: "0,5 em fração é:", a: "1/3", b: "1/2", c: "2/3", d: "3/4", correta: "b" },
-                { texto: "Uma dúzia e meia:", a: "12", b: "15", c: "18", d: "24", correta: "c" }
-            ],
-            3: [
-                { texto: "3 × (4 + 7) - 2³ = ?", a: "25", b: "29", c: "33", d: "37", correta: "a" },
-                { texto: "x + 12 = 30 → x = ?", a: "12", b: "15", c: "18", d: "20", correta: "c" },
-                { texto: "0,75 em fração:", a: "3/4", b: "2/3", c: "1/2", d: "4/5", correta: "a" },
-                { texto: "MDC de 18 e 24:", a: "3", b: "4", c: "6", d: "8", correta: "c" },
-                { texto: "√81 + 2² = ?", a: "11", b: "12", c: "13", d: "14", correta: "c" },
-                { texto: "Perímetro retângulo 5×3:", a: "15cm", b: "16cm", c: "18cm", d: "20cm", correta: "b" },
-                { texto: "25% de R$200:", a: "R$25", b: "R$50", c: "R$75", d: "R$100", correta: "b" },
-                { texto: "Ângulo reto mede:", a: "45°", b: "60°", c: "90°", d: "180°", correta: "c" },
-                { texto: "2³ × 2² = ?", a: "2⁵", b: "2⁶", c: "2⁴", d: "2³", correta: "a" },
-                { texto: "3/4 é maior que:", a: "1/2", b: "1/3", c: "1/4", d: "Todas", correta: "d" }
-            ]
-        };
-        
-        // Níveis 4-10
-        for(let n = 4; n <= 10; n++) {
-            bancoQuestoes[n] = [];
-            for(let i = 1; i <= 20; i++) {
-                bancoQuestoes[n].push({
-                    texto: `Desafio ${i} do Nível ${n}`,
-                    a: `Opção A${i}`, b: `Opção B${i}`, c: `Opção C${i}`, d: `Opção D${i}`,
-                    correta: ["a","b","c","d"][Math.floor(Math.random() * 4)]
-                });
-            }
-        }
-        
-        // ========== EMBARALHAMENTO ==========
-        function embaralhar(array) {
-            for(let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-        
-        // ========== RANKING POR NÍVEL ==========
-        let rankingNivel = JSON.parse(localStorage.getItem('rankingNivel')) || {};
-        
-        function salvarProgressoNivel(nivel, acertos, total, pontuacaoFinal) {
-            if(!rankingNivel[nivel]) rankingNivel[nivel] = [];
-            const percentual = Math.round((acertos / total) * 100);
-            rankingNivel[nivel].push({
-                nome: nomeJogador,
-                acertos: acertos,
-                total: total,
-                percentual: percentual,
-                pontuacao: pontuacaoFinal,
-                data: new Date().toISOString()
-            });
-            rankingNivel[nivel].sort((a, b) => {
-                if(b.percentual !== a.percentual) return b.percentual - a.percentual;
-                return b.pontuacao - a.pontuacao;
-            });
-            rankingNivel[nivel] = rankingNivel[nivel].slice(0, 15);
-            localStorage.setItem('rankingNivel', JSON.stringify(rankingNivel));
-        }
-        
-        function mostrarRankingNivel(nivel, botao) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('ativo'));
-            if(botao) botao.classList.add('ativo');
-            const dados = rankingNivel[nivel] || [];
-            const container = document.getElementById('rankingConteudo');
-            if(dados.length === 0) {
-                container.innerHTML = '<div class="sem-dados">🎯 Nenhum jogador ainda neste nível!</div>';
-                return;
-            }
-            let html = '';
-            dados.forEach((item, idx) => {
-                let medalha = idx === 0 ? '🥇 ' : idx === 1 ? '🥈 ' : idx === 2 ? '🥉 ' : `${idx+1}º `;
-                html += `
-                    <div class="rank-item">
-                        <div class="rank-posicao">${medalha}</div>
-                        <div class="rank-nome">${item.nome}</div>
-                        <div class="rank-pontos">${item.percentual}%</div>
-                        <div class="rank-acertos">(${item.acertos}/${item.total})</div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-        
-        // ========== VARIÁVEIS DO JOGO ==========
-        let nivelAtual = 1;
-        let questoesNivel = [];
-        let indiceQuestao = 0;
-        let pontuacao = 0;
-        let sequencia = 0;
-        let vidas = 3;
-        let alternativaSelecionada = null;
-        let processando = false;
-        let nomeJogador = "";
-        let acertosNivel = 0;
-        let totalQuestoesNivel = 0;
-        
-        // ========== FUNÇÕES DO JOGO ==========
-        function iniciarJogo() {
-            nomeJogador = prompt("Digite seu nome para começar:") || "Jogador";
-            if(nomeJogador.trim() === "") nomeJogador = "Jogador";
-            carregarNivel(1);
-        }
-        
-        function carregarNivel(nivel) {
-            nivelAtual = nivel;
-            acertosNivel = 0;
-            let banco = bancoQuestoes[nivel] || [];
-            const bancoEmbaralhado = embaralhar([...banco]);
-            questoesNivel = bancoEmbaralhado.slice(0, 10);
-            totalQuestoesNivel = questoesNivel.length;
-            indiceQuestao = 0;
-            vidas = 3;
-            sequencia = 0;
-            alternativaSelecionada = null;
-            processando = false;
-            atualizarUI();
-            carregarQuestao();
-        }
-        
-        function carregarQuestao() {
-            if(indiceQuestao >= questoesNivel.length) {
-                salvarProgressoNivel(nivelAtual, acertosNivel, totalQuestoesNivel, pontuacao);
-                if(nivelAtual < 10) {
-                    carregarNivel(nivelAtual + 1);
-                } else {
-                    finalizarJogo(true);
-                }
-                return;
-            }
-            
-            const q = questoesNivel[indiceQuestao];
-            document.getElementById('questionText').innerHTML = q.texto;
-            
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = `
-                <div class="option" data-letra="a">
-                    <div class="option-letter">A</div>
-                    <div class="option-text">${q.a}</div>
-                </div>
-                <div class="option" data-letra="b">
-                    <div class="option-letter">B</div>
-                    <div class="option-text">${q.b}</div>
-                </div>
-                <div class="option" data-letra="c">
-                    <div class="option-letter">C</div>
-                    <div class="option-text">${q.c}</div>
-                </div>
-                <div class="option" data-letra="d">
-                    <div class="option-letter">D</div>
-                    <div class="option-text">${q.d}</div>
-                </div>
-            `;
-            
-            document.querySelectorAll('.option').forEach(opt => {
-                opt.onclick = () => selecionarAlternativa(opt);
-            });
-            
-            alternativaSelecionada = null;
-            processando = false;
-            
-            document.querySelectorAll('.option').forEach(opt => {
-                opt.classList.remove('selected', 'disabled', 'correct-show', 'wrong-show');
-            });
-            
-            document.getElementById('nextBtn').disabled = true;
-            
-            const progresso = (indiceQuestao / questoesNivel.length) * 100;
-            document.getElementById('progressFill').style.width = progresso + "%";
-            document.getElementById('progressText').innerHTML = `Questão ${indiceQuestao + 1} de ${questoesNivel.length}`;
-        }
-        
-        function selecionarAlternativa(opt) {
-            if(processando) return;
-            if(alternativaSelecionada) {
-                alternativaSelecionada.classList.remove('selected');
-            }
-            alternativaSelecionada = opt;
-            opt.classList.add('selected');
-            document.getElementById('nextBtn').disabled = false;
-        }
-        
-        function proximaQuestao() {
-            if(processando) return;
-            if(!alternativaSelecionada) return;
-            
-            processando = true;
-            
-            const q = questoesNivel[indiceQuestao];
-            const letraSelecionada = alternativaSelecionada.getAttribute('data-letra');
-            const acertou = (letraSelecionada === q.correta);
-            
-            let textoCorreto = "";
-            document.querySelectorAll('.option').forEach(opt => {
-                if(opt.getAttribute('data-letra') === q.correta) {
-                    textoCorreto = opt.querySelector('.option-text').innerHTML;
-                }
-            });
-            
-            document.querySelectorAll('.option').forEach(opt => {
-                opt.classList.add('disabled');
-                if(opt.getAttribute('data-letra') === q.correta) {
-                    opt.classList.add('correct-show');
-                }
-                if(opt === alternativaSelecionada && !acertou) {
-                    opt.classList.add('wrong-show');
-                }
-            });
-            
-            if(acertou) {
-                acertosNivel++;
-                sequencia++;
-                const pontos = 10 + (sequencia * 2);
-                pontuacao += pontos;
-                mostrarFeedback(`✅ ACERTOU! +${pontos} pontos!`, "#27ae60");
-                confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-            } else {
-                sequencia = 0;
-                vidas--;
-                atualizarVidas();
-                mostrarFeedback(`❌ ERROU! Resposta: ${q.correta.toUpperCase()}) ${textoCorreto}`, "#e74c3c");
-                
-                if(vidas <= 0) {
-                    salvarProgressoNivel(nivelAtual, acertosNivel, totalQuestoesNivel, pontuacao);
-                    setTimeout(() => finalizarJogo(false), 2000);
-                    return;
-                }
-            }
-            
-            atualizarUI();
-            
-            setTimeout(() => {
-                indiceQuestao++;
-                processando = false;
-                carregarQuestao();
-            }, 2500);
-        }
-        
-        function atualizarUI() {
-            document.getElementById('levelDisplay').innerHTML = `📚 Nível ${nivelAtual}`;
-            document.getElementById('scoreDisplay').innerHTML = `⭐ ${pontuacao} pts`;
-            document.getElementById('streakDisplay').innerHTML = `🔥 ${sequencia}`;
-            atualizarVidas();
-        }
-        
-        function atualizarVidas() {
-            const container = document.getElementById('livesContainer');
-            let hearts = '';
-            for(let i = 0; i < 3; i++) {
-                hearts += `<span class="heart ${i >= vidas ? 'lost' : ''}">${i < vidas ? '❤️' : '🖤'}</span>`;
-            }
-            container.innerHTML = hearts;
-        }
-        
-        function mostrarFeedback(msg, cor) {
-            const div = document.createElement('div');
-            div.style.cssText = `
-                position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-                background: ${cor}; color: white; padding: 15px 25px;
-                border-radius: 25px; z-index: 2000; font-weight: bold;
-                font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            `;
-            div.innerHTML = msg;
-            document.body.appendChild(div);
-            setTimeout(() => div.remove(), 2500);
-        }
-        
-        function finalizarJogo(completou) {
-            if(completou) {
-                document.getElementById('gameoverTitle').innerHTML = "🎉 PARABÉNS! 🎉";
-                document.getElementById('gameoverText').innerHTML = "Você completou todos os 10 níveis!";
-                document.getElementById('gameoverStats').innerHTML = `Pontuação final: ${pontuacao} pontos<br>🏆 Mestre da Matemática! 🏆`;
-                confetti({ particleCount: 500, spread: 150, origin: { y: 0.5 } });
-            } else {
-                document.getElementById('gameoverTitle').innerHTML = "💀 GAME OVER 💀";
-                document.getElementById('gameoverText').innerHTML = `Você não passou do Nível ${nivelAtual}!`;
-                document.getElementById('gameoverStats').innerHTML = `Pontuação final: ${pontuacao} pontos`;
-            }
-            document.getElementById('gameoverModal').style.display = 'flex';
-        }
-        
-        function reiniciarJogo() {
-            pontuacao = 0;
-            sequencia = 0;
-            document.getElementById('gameoverModal').style.display = 'none';
-            carregarNivel(1);
-        }
-        
-        // ========== ADMIN ==========
-        function abrirAdmin() {
-            const senha = prompt("Digite a senha de administrador:");
-            if(senha === "Admin2024") {
-                abrirAdminPix();
-            } else if(senha !== null) {
-                alert("Senha incorreta!");
-            }
-        }
-        
-        // Inicialização
-        window.onload = () => {
-            iniciarJogo();
-            const primeiroBotao = document.querySelector('.tab-btn');
-            if(primeiroBotao) {
-                primeiroBotao.classList.add('ativo');
-                mostrarRankingNivel(1, primeiroBotao);
-            }
-        };
-    </script>
-</body>
-</html>
         function carregarJogo7ano() {
             document.getElementById('game-embed-container').innerHTML = `
-            <div style="background: white; border-radius: 30px; padding: 25px; text-align: center;">
+            <div style="background: white; border-radius: 30px; padding: 25px; text-align: center; max-width: 500px; margin: 0 auto;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
                     <div style="background: #2c3e50; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="levelDisplay7">📚 Nível 1</div>
                     <div style="background: #f1c40f; color: #333; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="scoreDisplay7">⭐ 0 pts</div>
@@ -1360,155 +516,189 @@
                     </div>
                     <div style="font-size: 0.8rem; margin-top: 5px; color: #666;" id="progressText7">Questão 1 de 10</div>
                 </div>
-                <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;" id="livesContainer7">❤️ ❤️ ❤️</div>
+                <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0; font-size: 1.5rem;" id="livesContainer7">❤️ ❤️ ❤️</div>
                 <div style="background: #f8f9fa; border-radius: 20px; padding: 25px; margin-bottom: 20px;">
                     <div style="font-size: 1.2rem; color: #333; margin-bottom: 20px; font-weight: 600;" id="questionText7">Carregando...</div>
                     <div style="display: flex; flex-direction: column; gap: 12px;" id="optionsContainer7"></div>
                 </div>
-                <button style="background: #27ae60; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="nextBtn7" disabled>▶ PRÓXIMA</button>
-                <button style="background: #3498db; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" onclick="if(window.reiniciarJogo7) reiniciarJogo7()">🔄 RECOMEÇAR JOGO</button>
+                <button style="background: #27ae60; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="nextBtn7">▶ PRÓXIMA</button>
+                <button style="background: #3498db; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="restartBtn7">🔄 RECOMEÇAR</button>
             </div>
-            <script>
-                const bancoQuestoes7 = {
-                    1: [
-                        { texto: "O resultado de (-8) + (-12) é:", a: "-20", b: "-4", c: "4", d: "20", correta: "a" },
-                        { texto: "Qual é o valor de (-3) × (-7)?", a: "-21", b: "-10", c: "10", d: "21", correta: "d" },
-                        { texto: "Resolva a expressão: 5 - 2 × 3 = ?", a: "-1", b: "1", c: "3", d: "9", correta: "a" },
-                        { texto: "O resultado de (-15) ÷ (+3) é:", a: "-5", b: "-3", c: "3", d: "5", correta: "a" },
-                        { texto: "Qual é o valor absoluto de |-9|?", a: "-9", b: "0", c: "9", d: "18", correta: "c" }
-                    ],
-                    2: [
-                        { texto: "Resolva a equação: 3x + 7 = 22", a: "3", b: "4", c: "5", d: "6", correta: "c" },
-                        { texto: "Se 2x - 5 = 9, então x vale:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
-                        { texto: "Qual é a raiz da equação 5x = 45?", a: "7", b: "8", c: "9", d: "10", correta: "c" }
-                    ],
-                    3: [
-                        { texto: "A forma decimal de 3/8 é:", a: "0,25", b: "0,3", c: "0,325", d: "0,375", correta: "d" },
-                        { texto: "25% de 120 é igual a:", a: "20", b: "25", c: "30", d: "35", correta: "c" },
-                        { texto: "A fração 3/5 corresponde a qual porcentagem?", a: "30%", b: "45%", c: "60%", d: "75%", correta: "c" }
-                    ]
-                };
+            `;
+            
+            // ========== JOGO 7º ANO ==========
+            const perguntas = [
+                { texto: "O resultado de (-8) + (-12) é:", a: "-20", b: "-4", c: "4", d: "20", correta: "a" },
+                { texto: "Qual é o valor de (-3) × (-7)?", a: "-21", b: "-10", c: "10", d: "21", correta: "d" },
+                { texto: "Resolva: 5 - 2 × 3 = ?", a: "-1", b: "1", c: "3", d: "9", correta: "a" },
+                { texto: "O resultado de (-15) ÷ (+3) é:", a: "-5", b: "-3", c: "3", d: "5", correta: "a" },
+                { texto: "Qual é o valor absoluto de |-9|?", a: "-9", b: "0", c: "9", d: "18", correta: "c" },
+                { texto: "2³ × 2² = ?", a: "2⁵", b: "2⁶", c: "4⁵", d: "4⁶", correta: "a" },
+                { texto: "A fração 2/5 em porcentagem é:", a: "20%", b: "25%", c: "40%", d: "50%", correta: "c" },
+                { texto: "O oposto de -12 é:", a: "-12", b: "0", c: "12", d: "24", correta: "c" },
+                { texto: "10 - (4 + 3) × 2 = ?", a: "-4", b: "0", c: "4", d: "6", correta: "a" },
+                { texto: "3/4 de 80 é:", a: "20", b: "40", c: "60", d: "80", correta: "c" }
+            ];
+            
+            let lista = [];
+            let indice = 0;
+            let pontos = 0;
+            let sequencia = 0;
+            let vidas = 3;
+            let selecionada = null;
+            let bloqueado = false;
+            
+            function embaralhar(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+            
+            function atualizarVidas() {
+                const hearts = document.getElementById('livesContainer7').children;
+                for (let i = 0; i < hearts.length; i++) {
+                    hearts[i].style.opacity = i >= vidas ? '0.3' : '1';
+                }
+            }
+            
+            function atualizarUI() {
+                document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontos} pts`;
+                document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia}`;
+                document.getElementById('levelDisplay7').innerHTML = `📚 Nível ${Math.floor(indice / 2) + 1}`;
+                const progresso = lista.length ? (indice / lista.length) * 100 : 0;
+                document.getElementById('progressFill7').style.width = progresso + "%";
+                document.getElementById('progressText7').innerHTML = `Questão ${indice + 1} de ${lista.length}`;
+            }
+            
+            function mostrarFeedback(msg, cor) {
+                const div = document.createElement('div');
+                div.style.cssText = `position:fixed; top:30%; left:50%; transform:translateX(-50%); background:${cor}; color:white; padding:15px 25px; border-radius:50px; z-index:2000; font-weight:bold; font-size:1rem;`;
+                div.innerHTML = msg;
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 2000);
+            }
+            
+            function carregarQuestao() {
+                if (indice >= lista.length) {
+                    mostrarFeedback(`🎉 PARABÉNS! Pontos: ${pontos}`, "#27ae60");
+                    canvasConfetti({ particleCount: 500, spread: 150 });
+                    setTimeout(() => reiniciarJogo(), 3000);
+                    return;
+                }
                 
-                for(let n = 4; n <= 10; n++) {
-                    bancoQuestoes7[n] = [];
-                    for(let i = 1; i <= 10; i++) {
-                        bancoQuestoes7[n].push({
-                            texto: `Desafio ${i} do Nível ${n}`,
-                            a: "Opção A", b: "Opção B", c: "Opção C", d: "Opção D",
-                            correta: ["a","b","c","d"][Math.floor(Math.random() * 4)]
-                        });
+                const q = lista[indice];
+                document.getElementById('questionText7').innerHTML = q.texto;
+                document.getElementById('optionsContainer7').innerHTML = `
+                    <div class="option" data-letra="a" style="background:white; border:2px solid #ddd; border-radius:15px; padding:12px; cursor:pointer; display:flex; align-items:center; gap:15px;">
+                        <div style="width:35px; height:35px; background:#2c3e50; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">A</div>
+                        <div style="color:#333;">${q.a}</div>
+                    </div>
+                    <div class="option" data-letra="b" style="background:white; border:2px solid #ddd; border-radius:15px; padding:12px; cursor:pointer; display:flex; align-items:center; gap:15px;">
+                        <div style="width:35px; height:35px; background:#2c3e50; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">B</div>
+                        <div style="color:#333;">${q.b}</div>
+                    </div>
+                    <div class="option" data-letra="c" style="background:white; border:2px solid #ddd; border-radius:15px; padding:12px; cursor:pointer; display:flex; align-items:center; gap:15px;">
+                        <div style="width:35px; height:35px; background:#2c3e50; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">C</div>
+                        <div style="color:#333;">${q.c}</div>
+                    </div>
+                    <div class="option" data-letra="d" style="background:white; border:2px solid #ddd; border-radius:15px; padding:12px; cursor:pointer; display:flex; align-items:center; gap:15px;">
+                        <div style="width:35px; height:35px; background:#2c3e50; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</div>
+                        <div style="color:#333;">${q.d}</div>
+                    </div>
+                `;
+                
+                document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+                    opt.onclick = () => {
+                        if (bloqueado) return;
+                        if (selecionada) {
+                            selecionada.style.background = 'white';
+                            selecionada.querySelector('div:last-child').style.color = '#333';
+                        }
+                        selecionada = opt;
+                        opt.style.background = '#3498db';
+                        opt.querySelector('div:last-child').style.color = 'white';
+                    };
+                });
+                
+                selecionada = null;
+                bloqueado = false;
+                document.getElementById('nextBtn7').disabled = false;
+                atualizarUI();
+            }
+            
+            function responder() {
+                if (bloqueado) return;
+                if (!selecionada) {
+                    mostrarFeedback("⚠️ Selecione uma alternativa!", "#e74c3c");
+                    return;
+                }
+                
+                bloqueado = true;
+                document.getElementById('nextBtn7').disabled = true;
+                
+                const q = lista[indice];
+                const letraEscolhida = selecionada.getAttribute('data-letra');
+                const acertou = (letraEscolhida === q.correta);
+                
+                let textoCorreto = "";
+                document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                    if (opt.getAttribute('data-letra') === q.correta) {
+                        textoCorreto = opt.querySelector('div:last-child').innerHTML;
+                        opt.style.background = '#27ae60';
                     }
-                }
-                
-                function embaralhar7(array) {
-                    for(let i = array.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [array[i], array[j]] = [array[j], array[i]];
+                    if (opt === selecionada && !acertou) {
+                        opt.style.background = '#e74c3c';
                     }
-                    return array;
-                }
+                });
                 
-                let nivelAtual7 = 1, questoesNivel7 = [], indiceQuestao7 = 0, pontuacao7 = 0, sequencia7 = 0, vidas7 = 3;
-                let alternativaSelecionada7 = null, processando7 = false, acertosNivel7 = 0;
-                
-                function carregarNivel7(nivel) {
-                    nivelAtual7 = nivel;
-                    acertosNivel7 = 0;
-                    let banco = bancoQuestoes7[nivel] || [];
-                    questoesNivel7 = embaralhar7([...banco]).slice(0, 10);
-                    indiceQuestao7 = 0;
-                    vidas7 = 3;
-                    sequencia7 = 0;
-                    carregarQuestao7();
-                }
-                
-                function carregarQuestao7() {
-                    if(indiceQuestao7 >= questoesNivel7.length) {
-                        if(nivelAtual7 < 10) carregarNivel7(nivelAtual7 + 1);
-                        else finalizarJogo7(true);
+                if (acertou) {
+                    sequencia++;
+                    const ganho = 10 + (sequencia * 2);
+                    pontos += ganho;
+                    mostrarFeedback(`✅ ACERTOU! +${ganho} pontos!`, "#27ae60");
+                    canvasConfetti({ particleCount: 50, spread: 60 });
+                } else {
+                    sequencia = 0;
+                    vidas--;
+                    atualizarVidas();
+                    mostrarFeedback(`❌ ERROU! Resposta: ${q.correta.toUpperCase()}) ${textoCorreto}`, "#e74c3c");
+                    if (vidas <= 0) {
+                        setTimeout(() => {
+                            mostrarFeedback(`💀 GAME OVER! Pontos: ${pontos}`, "#e74c3c");
+                            setTimeout(() => reiniciarJogo(), 2000);
+                        }, 500);
                         return;
                     }
-                    const q = questoesNivel7[indiceQuestao7];
-                    document.getElementById('questionText7').innerHTML = q.texto;
-                    document.getElementById('optionsContainer7').innerHTML = `
-                        <div class="option" data-letra="a" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
-                            <div style="flex:1; text-align:left; color:#333;">${q.a}</div>
-                        </div>
-                        <div class="option" data-letra="b" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">B</div>
-                            <div style="flex:1; text-align:left; color:#333;">${q.b}</div>
-                        </div>
-                        <div class="option" data-letra="c" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">C</div>
-                            <div style="flex:1; text-align:left; color:#333;">${q.c}</div>
-                        </div>
-                        <div class="option" data-letra="d" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">D</div>
-                            <div style="flex:1; text-align:left; color:#333;">${q.d}</div>
-                        </div>
-                    `;
-                    document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
-                        opt.onclick = () => {
-                            if(processando7) return;
-                            if(alternativaSelecionada7) alternativaSelecionada7.classList.remove('selected');
-                            alternativaSelecionada7 = opt;
-                            opt.classList.add('selected');
-                            document.getElementById('nextBtn7').disabled = false;
-                        };
-                    });
-                    alternativaSelecionada7 = null;
-                    processando7 = false;
-                    document.getElementById('nextBtn7').disabled = true;
-                    const progresso = (indiceQuestao7 / questoesNivel7.length) * 100;
-                    document.getElementById('progressFill7').style.width = progresso + "%";
-                    document.getElementById('progressText7').innerHTML = `Questão ${indiceQuestao7 + 1} de ${questoesNivel7.length}`;
-                    document.getElementById('levelDisplay7').innerHTML = `📚 Nível ${nivelAtual7}`;
-                    document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
-                    document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
                 }
                 
-                function atualizarVidas7() {
-                    let hearts = '';
-                    for(let i = 0; i < 3; i++) hearts += `<span style="font-size:1.8rem;">${i < vidas7 ? '❤️' : '🖤'}</span>`;
-                    document.getElementById('livesContainer7').innerHTML = hearts;
-                }
+                atualizarUI();
                 
-                window.proximaQuestao7 = function() {
-                    if(processando7 || !alternativaSelecionada7) return;
-                    processando7 = true;
-                    const q = questoesNivel7[indiceQuestao7];
-                    const letraSelecionada = alternativaSelecionada7.getAttribute('data-letra');
-                    const acertou = (letraSelecionada === q.correta);
-                    document.querySelectorAll('#optionsContainer7 .option').forEach(opt => opt.classList.add('disabled'));
-                    if(acertou) {
-                        acertosNivel7++;
-                        sequencia7++;
-                        pontuacao7 += 10 + (sequencia7 * 2);
-                        canvasConfetti({ particleCount: 50, spread: 60 });
-                    } else {
-                        sequencia7 = 0;
-                        vidas7--;
-                        atualizarVidas7();
-                        if(vidas7 <= 0) { setTimeout(() => finalizarJogo7(false), 2000); return; }
-                    }
-                    document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
-                    document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
-                    setTimeout(() => { indiceQuestao7++; processando7 = false; carregarQuestao7(); }, 1500);
-                };
-                
-                function finalizarJogo7(completou) {
-                    if(completou) alert(`🎉 PARABÉNS! Pontuação: ${pontuacao7}`);
-                    else alert(`💀 GAME OVER! Pontuação: ${pontuacao7}`);
-                    if(window.parent && window.parent.fecharJogo) window.parent.fecharJogo();
-                    else location.reload();
-                }
-                
-                window.reiniciarJogo7 = function() { nivelAtual7 = 1; pontuacao7 = 0; carregarNivel7(1); };
-                document.getElementById('nextBtn7').onclick = () => window.proximaQuestao7();
-                carregarNivel7(1);
-            <\/script>
-            `;
+                setTimeout(() => {
+                    indice++;
+                    selecionada = null;
+                    carregarQuestao();
+                }, 2000);
+            }
+            
+            function reiniciarJogo() {
+                lista = embaralhar([...perguntas]);
+                indice = 0;
+                pontos = 0;
+                sequencia = 0;
+                vidas = 3;
+                selecionada = null;
+                bloqueado = false;
+                const hearts = document.getElementById('livesContainer7').children;
+                for (let i = 0; i < hearts.length; i++) hearts[i].style.opacity = '1';
+                carregarQuestao();
+            }
+            
+            document.getElementById('nextBtn7').onclick = responder;
+            document.getElementById('restartBtn7').onclick = reiniciarJogo;
+            reiniciarJogo();
         }
         
         function abrirDoacao() { document.getElementById('doacaoModal').style.display = 'flex'; }
