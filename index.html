@@ -19,7 +19,6 @@
             color: #fff;
         }
         
-        /* HEADER */
         .header {
             background: rgba(0,0,0,0.3);
             padding: 15px 30px;
@@ -36,15 +35,8 @@
             font-weight: bold;
         }
         
-        .logo span {
-            color: #f1c40f;
-        }
-        
-        .logo small {
-            font-size: 0.7rem;
-            color: #27ae60;
-            display: block;
-        }
+        .logo span { color: #f1c40f; }
+        .logo small { font-size: 0.7rem; color: #27ae60; display: block; }
         
         .nav {
             display: flex;
@@ -87,14 +79,12 @@
             font-size: 1.5rem;
         }
         
-        /* CONTAINER PRINCIPAL */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* BANNER GRATUITO */
         .free-banner {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
             border-radius: 15px;
@@ -108,13 +98,8 @@
             gap: 15px;
         }
         
-        .free-banner h3 {
-            color: white;
-        }
-        
-        .free-banner p {
-            opacity: 0.9;
-        }
+        .free-banner h3 { color: white; }
+        .free-banner p { opacity: 0.9; }
         
         .btn-doar {
             background: rgba(255,255,255,0.2);
@@ -123,15 +108,8 @@
             padding: 8px 20px;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
         }
         
-        .btn-doar:hover {
-            background: white;
-            color: #27ae60;
-        }
-        
-        /* CARDS DE JOGOS */
         .section-title {
             font-size: 1.5rem;
             margin: 30px 0 20px;
@@ -162,39 +140,12 @@
             background: rgba(255,255,255,0.15);
         }
         
-        .game-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
+        .game-icon { font-size: 3rem; margin-bottom: 15px; }
+        .game-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+        .game-info { display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.8rem; color: #ddd; }
+        .game-level { background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px; }
+        .game-free { background: #27ae60; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; }
         
-        .game-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .game-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #ddd;
-        }
-        
-        .game-level {
-            background: rgba(0,0,0,0.3);
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-        
-        .game-free {
-            background: #27ae60;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-        }
-        
-        /* RANKING */
         .ranking-container {
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
@@ -216,7 +167,6 @@
             border-radius: 25px;
             color: white;
             cursor: pointer;
-            transition: all 0.3s;
         }
         
         .rank-tab:hover, .rank-tab.active {
@@ -235,11 +185,8 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
-        .ranking-table th {
-            color: #f1c40f;
-        }
+        .ranking-table th { color: #f1c40f; }
         
-        /* CONQUISTAS */
         .badges-grid {
             display: flex;
             gap: 15px;
@@ -253,24 +200,15 @@
             padding: 15px;
             text-align: center;
             min-width: 100px;
-            transition: all 0.3s;
         }
         
         .badge.obtido {
             background: linear-gradient(135deg, #f1c40f, #e67e22);
-            transform: scale(1.05);
         }
         
-        .badge.locked {
-            opacity: 0.4;
-        }
+        .badge.locked { opacity: 0.4; }
+        .badge-icon { font-size: 2rem; margin-bottom: 8px; }
         
-        .badge-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-        
-        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -319,10 +257,7 @@
             border-radius: 25px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
         }
-        
-        button:hover { transform: scale(0.98); }
         
         input {
             background: rgba(255,255,255,0.9);
@@ -340,10 +275,9 @@
             font-size: 0.8rem;
         }
         
-        /* ÁREA DO JOGO - LOCAL PARA INSERIR O CÓDIGO */
         .jogo-area {
             display: none;
-            background: white;
+            background: #1a1a2e;
             border-radius: 30px;
             padding: 20px;
             margin-bottom: 20px;
@@ -354,348 +288,11 @@
             margin-bottom: 15px;
             display: inline-block;
         }
-        <!-- ============================================ -->
-<!-- JOGO MATEMÁTICA 7º ANO - SAEB                -->
-<!-- ============================================ -->
-<!-- COLE ESTE CÓDIGO DENTRO DA DIV game-embed-container -->
-
-<div id="jogo7ano-container" style="background: white; border-radius: 30px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;">
-    <div class="header" style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-        <div class="badge badge-level" style="background: #2c3e50; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="levelDisplay7">📚 Nível 1</div>
-        <div class="badge badge-score" style="background: #f1c40f; color: #333; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="scoreDisplay7">⭐ 0 pts</div>
-        <div class="badge badge-streak" style="background: #e74c3c; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="streakDisplay7">🔥 0</div>
-    </div>
-    
-    <div class="progress-area" style="margin-bottom: 20px;">
-        <div class="progress-bar" style="width: 100%; height: 10px; background: #eee; border-radius: 10px; overflow: hidden;">
-            <div class="progress-fill" style="height: 100%; background: #27ae60; transition: width 0.5s; width: 0%;" id="progressFill7"></div>
-        </div>
-        <div style="font-size: 0.8rem; margin-top: 5px; color: #666;" id="progressText7">Questão 1 de 10</div>
-    </div>
-    
-    <div class="lives" style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;" id="livesContainer7">❤️ ❤️ ❤️</div>
-    
-    <div class="question-box" style="background: #f8f9fa; border-radius: 20px; padding: 25px; margin-bottom: 20px;">
-        <div class="question-text" style="font-size: 1.2rem; color: #333; margin-bottom: 20px; font-weight: 600;" id="questionText7">Carregando...</div>
-        <div class="options" style="display: flex; flex-direction: column; gap: 12px;" id="optionsContainer7"></div>
-    </div>
-    
-    <button class="btn-next" style="background: #27ae60; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="nextBtn7" disabled>▶ PRÓXIMA</button>
-    <button class="btn-restart" style="background: #3498db; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" onclick="reiniciarJogo7()">🔄 RECOMEÇAR JOGO</button>
-</div>
-
-<script>
-    // ========== BANCO DE QUESTÕES (7º ANO - BNCC) ==========
-    const bancoQuestoes7 = {
-        1: [
-            { texto: "O resultado de (-8) + (-12) é:", a: "-20", b: "-4", c: "4", d: "20", correta: "a" },
-            { texto: "Qual é o valor de (-3) × (-7)?", a: "-21", b: "-10", c: "10", d: "21", correta: "d" },
-            { texto: "Resolva a expressão: 5 - 2 × 3 = ?", a: "-1", b: "1", c: "3", d: "9", correta: "a" },
-            { texto: "O resultado de (-15) ÷ (+3) é:", a: "-5", b: "-3", c: "3", d: "5", correta: "a" },
-            { texto: "Qual é o valor absoluto de |-9|?", a: "-9", b: "0", c: "9", d: "18", correta: "c" },
-            { texto: "Resolva: 2³ × 2² = ?", a: "2⁵", b: "2⁶", c: "4⁵", d: "4⁶", correta: "a" },
-            { texto: "A fração 2/5 em porcentagem é:", a: "20%", b: "25%", c: "40%", d: "50%", correta: "c" },
-            { texto: "Qual é o oposto de -12?", a: "-12", b: "0", c: "12", d: "24", correta: "c" },
-            { texto: "Resolva: 10 - (4 + 3) × 2 = ?", a: "-4", b: "0", c: "4", d: "6", correta: "a" },
-            { texto: "O valor de 3/4 de 80 é:", a: "20", b: "40", c: "60", d: "80", correta: "c" }
-        ],
-        2: [
-            { texto: "Resolva a equação: 3x + 7 = 22", a: "3", b: "4", c: "5", d: "6", correta: "c" },
-            { texto: "Se 2x - 5 = 9, então x vale:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
-            { texto: "O conjunto solução de x + 8 < 15 é:", a: "x < 5", b: "x < 7", c: "x < 8", d: "x < 23", correta: "b" },
-            { texto: "Qual é a raiz da equação 5x = 45?", a: "7", b: "8", c: "9", d: "10", correta: "c" },
-            { texto: "Resolva: 2x - 3 = x + 5", a: "6", b: "7", c: "8", d: "9", correta: "c" },
-            { texto: "O valor de x em 4(x - 2) = 20 é:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
-            { texto: "Qual é a solução da inequação 2x ≥ 10?", a: "x ≥ 3", b: "x ≥ 5", c: "x ≤ 5", d: "x ≤ 3", correta: "b" },
-            { texto: "O perímetro de um quadrado de lado x é 20 cm. Qual o valor de x?", a: "3 cm", b: "4 cm", c: "5 cm", d: "6 cm", correta: "c" },
-            { texto: "A idade de Pedro é o dobro da idade de Ana. A soma das idades é 36. Qual a idade de Ana?", a: "10", b: "12", c: "14", d: "16", correta: "b" },
-            { texto: "Resolva: 3x + 2 = 2x + 7", a: "3", b: "4", c: "5", d: "6", correta: "c" }
-        ],
-        3: [
-            { texto: "A forma decimal de 3/8 é:", a: "0,25", b: "0,3", c: "0,325", d: "0,375", correta: "d" },
-            { texto: "25% de 120 é igual a:", a: "20", b: "25", c: "30", d: "35", correta: "c" },
-            { texto: "Em uma classe com 40 alunos, 15 são meninas. Qual a porcentagem de meninos?", a: "37,5%", b: "52,5%", c: "62,5%", d: "67,5%", correta: "c" },
-            { texto: "Um produto custa R$ 80,00 e teve um aumento de 15%. Qual o novo preço?", a: "R$ 88", b: "R$ 90", c: "R$ 92", d: "R$ 95", correta: "c" },
-            { texto: "A fração 3/5 corresponde a qual porcentagem?", a: "30%", b: "45%", c: "60%", d: "75%", correta: "c" },
-            { texto: "Na forma de fração irredutível, 0,625 é igual a:", a: "5/8", b: "3/4", c: "2/3", d: "7/8", correta: "a" },
-            { texto: "Aprovado: 18 alunos de uma turma de 30. Qual o percentual de aprovação?", a: "50%", b: "60%", c: "70%", d: "80%", correta: "b" },
-            { texto: "O número 0,333... em fração é:", a: "1/2", b: "1/3", c: "2/3", d: "3/4", correta: "b" },
-            { texto: "Em uma promoção, um produto de R$ 200,00 teve desconto de 20%. Quanto paguei?", a: "R$ 140", b: "R$ 150", c: "R$ 160", d: "R$ 170", correta: "c" },
-            { texto: "A forma percentual de 35/100 é:", a: "3,5%", b: "35%", c: "65%", d: "70%", correta: "b" }
-        ],
-        4: [
-            { texto: "Se a = 3 e b = -2, qual o valor de a² + b²?", a: "5", b: "9", c: "11", d: "13", correta: "d" },
-            { texto: "Qual o valor numérico de 2x - 3y para x = 4 e y = -1?", a: "5", b: "8", c: "11", d: "14", correta: "c" },
-            { texto: "A área de um retângulo de base 8 cm e altura x cm é 56 cm². Qual o valor de x?", a: "5 cm", b: "6 cm", c: "7 cm", d: "8 cm", correta: "c" },
-            { texto: "O volume de um cubo de aresta a = 5 cm é:", a: "25 cm³", b: "75 cm³", c: "100 cm³", d: "125 cm³", correta: "d" },
-            { texto: "O perímetro de um triângulo equilátero de lado 12 cm é:", a: "24 cm", b: "36 cm", c: "48 cm", d: "60 cm", correta: "b" },
-            { texto: "A expressão (x + y)² é igual a:", a: "x² + y²", b: "x² + 2xy + y²", c: "x² + xy + y²", d: "2x + 2y", correta: "b" },
-            { texto: "Se um quadrado tem área 64 cm², seu perímetro é:", a: "24 cm", b: "28 cm", c: "32 cm", d: "36 cm", correta: "c" },
-            { texto: "O diâmetro de uma circunferência de raio 7 cm é:", a: "7 cm", b: "14 cm", c: "21 cm", d: "28 cm", correta: "b" },
-            { texto: "A área de um círculo de raio 5 cm (π = 3,14) é:", a: "31,4 cm²", b: "62,8 cm²", c: "78,5 cm²", d: "94,2 cm²", correta: "c" },
-            { texto: "O valor de 2³ + 3² é:", a: "13", b: "15", c: "17", d: "19", correta: "c" }
-        ],
-        5: [
-            { texto: "Qual desses números é racional?", a: "√2", b: "π", c: "0,333...", d: "√3", correta: "c" },
-            { texto: "A √16 + √9 é igual a:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
-            { texto: "O valor aproximado de √10 é:", a: "3,1", b: "3,2", c: "3,3", d: "3,4", correta: "a" },
-            { texto: "Colocando em ordem crescente: 2,3 ; 2,03 ; 2,003 ; 2,33", a: "2,003;2,03;2,3;2,33", b: "2,03;2,003;2,3;2,33", c: "2,33;2,3;2,03;2,003", d: "2,003;2,03;2,33;2,3", correta: "a" },
-            { texto: "A √64 - √36 é igual a:", a: "2", b: "3", c: "4", d: "5", correta: "a" },
-            { texto: "Entre 5 e 6 existe o número irracional:", a: "5,5", b: "5,25", c: "√30", d: "5,75", correta: "c" },
-            { texto: "O valor de 0,999... é igual a:", a: "0,9", b: "0,99", c: "0,999", d: "1", correta: "d" },
-            { texto: "A √49 + √64 vale:", a: "13", b: "14", c: "15", d: "16", correta: "c" },
-            { texto: "O número √2 é classificado como:", a: "Natural", b: "Inteiro", c: "Racional", d: "Irracional", correta: "d" },
-            { texto: "A √81 + √25 - √16 = ?", a: "8", b: "10", c: "12", d: "14", correta: "c" }
-        ]
-    };
-    
-    // Níveis 6-10
-    for(let n = 6; n <= 10; n++) {
-        bancoQuestoes7[n] = [];
-        for(let i = 1; i <= 20; i++) {
-            bancoQuestoes7[n].push({
-                texto: `Desafio ${i} do Nível ${n}`,
-                a: `Opção A${i}`, b: `Opção B${i}`, c: `Opção C${i}`, d: `Opção D${i}`,
-                correta: ["a","b","c","d"][Math.floor(Math.random() * 4)]
-            });
-        }
-    }
-    
-    // ========== EMBARALHAMENTO ==========
-    function embaralhar7(array) {
-        for(let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-    
-    // ========== VARIÁVEIS DO JOGO ==========
-    let nivelAtual7 = 1;
-    let questoesNivel7 = [];
-    let indiceQuestao7 = 0;
-    let pontuacao7 = 0;
-    let sequencia7 = 0;
-    let vidas7 = 3;
-    let alternativaSelecionada7 = null;
-    let processando7 = false;
-    let nomeJogador7 = prompt("Digite seu nome para começar:") || "Jogador";
-    let acertosNivel7 = 0;
-    let totalQuestoesNivel7 = 0;
-    
-    // ========== FUNÇÕES DO JOGO ==========
-    function carregarNivel7(nivel) {
-        nivelAtual7 = nivel;
-        acertosNivel7 = 0;
-        let banco = bancoQuestoes7[nivel] || [];
-        const bancoEmbaralhado = embaralhar7([...banco]);
-        questoesNivel7 = bancoEmbaralhado.slice(0, 10);
-        totalQuestoesNivel7 = questoesNivel7.length;
-        indiceQuestao7 = 0;
-        vidas7 = 3;
-        sequencia7 = 0;
-        alternativaSelecionada7 = null;
-        processando7 = false;
-        atualizarUI7();
-        carregarQuestao7();
-    }
-    
-    function carregarQuestao7() {
-        if(indiceQuestao7 >= questoesNivel7.length) {
-            if(nivelAtual7 < 10) {
-                carregarNivel7(nivelAtual7 + 1);
-            } else {
-                finalizarJogo7(true);
-            }
-            return;
-        }
-        
-        const q = questoesNivel7[indiceQuestao7];
-        document.getElementById('questionText7').innerHTML = q.texto;
-        
-        const container = document.getElementById('optionsContainer7');
-        container.innerHTML = `
-            <div class="option" data-letra="a" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
-                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.a}</div>
-            </div>
-            <div class="option" data-letra="b" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">B</div>
-                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.b}</div>
-            </div>
-            <div class="option" data-letra="c" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">C</div>
-                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.c}</div>
-            </div>
-            <div class="option" data-letra="d" style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
-                <div class="option-letter" style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">D</div>
-                <div class="option-text" style="flex: 1; text-align: left; color: #333;">${q.d}</div>
-            </div>
-        `;
-        
-        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
-            opt.onclick = () => selecionarAlternativa7(opt);
-        });
-        
-        alternativaSelecionada7 = null;
-        processando7 = false;
-        
-        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
-            opt.classList.remove('selected', 'disabled', 'correct-show', 'wrong-show');
-        });
-        
-        document.getElementById('nextBtn7').disabled = true;
-        
-        const progresso = (indiceQuestao7 / questoesNivel7.length) * 100;
-        document.getElementById('progressFill7').style.width = progresso + "%";
-        document.getElementById('progressText7').innerHTML = `Questão ${indiceQuestao7 + 1} de ${questoesNivel7.length}`;
-    }
-    
-    function selecionarAlternativa7(opt) {
-        if(processando7) return;
-        if(alternativaSelecionada7) {
-            alternativaSelecionada7.classList.remove('selected');
-        }
-        alternativaSelecionada7 = opt;
-        opt.classList.add('selected');
-        document.getElementById('nextBtn7').disabled = false;
-    }
-    
-    function proximaQuestao7() {
-        if(processando7) return;
-        if(!alternativaSelecionada7) return;
-        
-        processando7 = true;
-        
-        const q = questoesNivel7[indiceQuestao7];
-        const letraSelecionada = alternativaSelecionada7.getAttribute('data-letra');
-        const acertou = (letraSelecionada === q.correta);
-        
-        let textoCorreto = "";
-        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
-            if(opt.getAttribute('data-letra') === q.correta) {
-                textoCorreto = opt.querySelector('.option-text').innerHTML;
-            }
-        });
-        
-        document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
-            opt.classList.add('disabled');
-            if(opt.getAttribute('data-letra') === q.correta) {
-                opt.classList.add('correct-show');
-            }
-            if(opt === alternativaSelecionada7 && !acertou) {
-                opt.classList.add('wrong-show');
-            }
-        });
-        
-        if(acertou) {
-            acertosNivel7++;
-            sequencia7++;
-            const pontos = 10 + (sequencia7 * 2);
-            pontuacao7 += pontos;
-            mostrarFeedback7(`✅ ACERTOU! +${pontos} pontos!`, "#27ae60");
-            canvasConfetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-        } else {
-            sequencia7 = 0;
-            vidas7--;
-            atualizarVidas7();
-            mostrarFeedback7(`❌ ERROU! Resposta: ${q.correta.toUpperCase()}) ${textoCorreto}`, "#e74c3c");
-            
-            if(vidas7 <= 0) {
-                setTimeout(() => finalizarJogo7(false), 2000);
-                return;
-            }
-        }
-        
-        atualizarUI7();
-        
-        setTimeout(() => {
-            indiceQuestao7++;
-            processando7 = false;
-            carregarQuestao7();
-        }, 2500);
-    }
-    
-    function atualizarUI7() {
-        document.getElementById('levelDisplay7').innerHTML = `📚 Nível ${nivelAtual7}`;
-        document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
-        document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
-        atualizarVidas7();
-    }
-    
-    function atualizarVidas7() {
-        const container = document.getElementById('livesContainer7');
-        let hearts = '';
-        for(let i = 0; i < 3; i++) {
-            hearts += `<span class="heart ${i >= vidas7 ? 'lost' : ''}" style="font-size: 1.8rem;">${i < vidas7 ? '❤️' : '🖤'}</span>`;
-        }
-        container.innerHTML = hearts;
-    }
-    
-    function mostrarFeedback7(msg, cor) {
-        const div = document.createElement('div');
-        div.style.cssText = `
-            position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-            background: ${cor}; color: white; padding: 15px 25px;
-            border-radius: 25px; z-index: 2000; font-weight: bold;
-            font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        `;
-        div.innerHTML = msg;
-        document.body.appendChild(div);
-        setTimeout(() => div.remove(), 2500);
-    }
-    
-    function finalizarJogo7(completou) {
-        if(completou) {
-            alert(`🎉 PARABÉNS! 🎉\nVocê completou todos os 10 níveis!\nPontuação final: ${pontuacao7} pontos`);
-        } else {
-            alert(`💀 GAME OVER 💀\nVocê não passou do Nível ${nivelAtual7}!\nPontuação final: ${pontuacao7} pontos`);
-        }
-        if(window.parent && window.parent.fecharJogo) {
-            window.parent.fecharJogo();
-        } else {
-            location.reload();
-        }
-    }
-    
-    function reiniciarJogo7() {
-        nivelAtual7 = 1;
-        pontuacao7 = 0;
-        sequencia7 = 0;
-        carregarNivel7(1);
-    }
-    
-    // Configurar botão próximo
-    document.getElementById('nextBtn7').onclick = proximaQuestao7;
-    
-    // Iniciar jogo
-    carregarNivel7(1);
-</script>
-        /* =============================================== */
-        /* ========== LOCAL PARA INSERIR O JOGO ========== */
-        /* =============================================== */
-        /* COLE O CÓDIGO COMPLETO DO SEU JOGO DENTRO DA DIV ABAIXO */
-        /* O JOGO SERÁ INSERIDO DINAMICAMENTE QUANDO O CARD FOR CLICADO */
-        
-        .game-embed {
-            width: 100%;
-            min-height: 500px;
-        }
-        
-        /* =============================================== */
         
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            .free-banner {
-                flex-direction: column;
-                text-align: center;
-            }
+            .header { flex-direction: column; text-align: center; }
+            .games-grid { grid-template-columns: 1fr; }
+            .free-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -716,7 +313,6 @@
     </div>
     
     <div class="container">
-        <!-- BANNER GRATUITO -->
         <div class="free-banner">
             <div>
                 <h3>🎉 PLATAFORMA TOTALMENTE GRATUITA!</h3>
@@ -727,10 +323,7 @@
         
         <!-- PÁGINA JOGOS -->
         <div id="pagina-jogos">
-            <div class="section-title">
-                <span>🎮</span> JOGOS DISPONÍVEIS
-            </div>
-            
+            <div class="section-title"><span>🎮</span> JOGOS DISPONÍVEIS</div>
             <div class="games-grid">
                 <div class="game-card" onclick="abrirJogo('tabuada')">
                     <div class="game-icon">⚔️</div>
@@ -742,51 +335,42 @@
                     </div>
                 </div>
                 
-                <div class="game-card" onclick="abrirJogo('potencias')">
+                <div class="game-card" onclick="abrirJogo('7ano')">
                     <div class="game-icon">🧮</div>
-                    <div class="game-title">Batalha das Potências</div>
+                    <div class="game-title">Matemática 7º Ano</div>
                     <div class="game-info">
-                        <span>📚 6º Ano</span>
-                        <span class="game-level">🚧 Em breve</span>
+                        <span>📚 7º Ano - SAEB</span>
+                        <span class="game-level">🔥 10 Níveis</span>
                         <span class="game-free">GRÁTIS</span>
                     </div>
                 </div>
                 
-                <div class="game-card" onclick="abrirJogo('equacoes')">
+                <div class="game-card" onclick="abrirJogo('8ano')">
                     <div class="game-icon">📐</div>
-                    <div class="game-title">Equações em Ação</div>
+                    <div class="game-title">Geometria Radical</div>
                     <div class="game-info">
-                        <span>📚 7º Ano</span>
+                        <span>📚 8º Ano</span>
                         <span class="game-level">🚧 Em breve</span>
                         <span class="game-free">GRÁTIS</span>
                     </div>
                 </div>
             </div>
             
-            <!-- ESTATÍSTICAS RÁPIDAS -->
             <div class="ranking-container">
                 <h3>📊 SUAS ESTATÍSTICAS</h3>
                 <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
                     <div><strong>🎮 Partidas:</strong> <span id="totalPartidas">0</span></div>
                     <div><strong>✅ Acertos:</strong> <span id="totalAcertos">0</span></div>
                     <div><strong>⭐ Média:</strong> <span id="mediaAcertos">0</span>%</div>
-                    <div><strong>🏆 Melhor Fase:</strong> <span id="melhorFase">Nível 1</span></div>
                 </div>
             </div>
         </div>
         
-        <!-- ÁREA DO JOGO - LOCAL ONDE O JOGO SERÁ INSERIDO -->
+        <!-- ÁREA DO JOGO -->
         <div id="jogo-container" style="display: none;">
             <div class="jogo-area">
                 <button class="voltar-btn" onclick="fecharJogo()">◀ VOLTAR</button>
-                <div id="game-embed-container" class="game-embed">
-                    <!-- O JOGO SERÁ INSERIDO AQUI DINAMICAMENTE -->
-                    <!-- ============================================= -->
-                    <!-- ============================================= -->
-                    <!-- === COLE O CÓDIGO DO SEU JOGO ABAXO ========= -->
-                    <!-- ============================================= -->
-                    <!-- ============================================= -->
-                </div>
+                <div id="game-embed-container"></div>
             </div>
         </div>
         
@@ -799,14 +383,10 @@
                     <button class="rank-tab" onclick="filtrarRanking('municipio', this)">🏙️ Município</button>
                     <button class="rank-tab" onclick="filtrarRanking('estado', this)">🏛️ Estado</button>
                 </div>
-                <div id="ranking-lista">
-                    <table class="ranking-table">
-                        <thead>
-                            <tr><th>Posição</th><th>Jogador</th><th>Escola</th><th>Pontos</th><th>Fase</th></tr>
-                        </thead>
-                        <tbody id="ranking-body"></tbody>
-                    寸
-                </div>
+                <table class="ranking-table">
+                    <thead><tr><th>Posição</th><th>Jogador</th><th>Escola</th><th>Pontos</th></tr></thead>
+                    <tbody id="ranking-body"></tbody>
+                </table>
             </div>
         </div>
         
@@ -820,381 +400,97 @@
         
         <!-- PÁGINA BIBLIOTECA -->
         <div id="pagina-biblioteca" style="display: none;">
-            <div class="section-title">📚 BIBLIOTECA DE MATERIAIS</div>
+            <div class="section-title">📚 BIBLIOTECA</div>
             <div class="games-grid" id="materiais-grid"></div>
         </div>
         
-        <footer>
-            © 2026 EduPlay | Plataforma Educacional Gratuita | Doações voluntárias mantêm o projeto vivo
-        </footer>
+        <footer>© 2026 EduPlay | Plataforma Educacional Gratuita</footer>
     </div>
     
-    <!-- MODAL DOAÇÃO -->
+    <!-- MODAIS -->
     <div id="doacaoModal" class="modal">
         <div class="modal-content">
             <h2>💝 Doe para manter o projeto</h2>
-            <p>Sua contribuição voluntária ajuda a manter a plataforma gratuita para todos!</p>
             <div class="pix-area">
                 <strong>📱 Chave PIX:</strong>
-                <div class="pix-chave" id="pixChaveDisplay">carregando...</div>
+                <div class="pix-chave" id="pixChaveDisplay">eduplay@plataforma.com</div>
                 <button onclick="copiarPix()">📋 Copiar Chave PIX</button>
             </div>
             <button onclick="fecharDoacao()" style="background:#666">FECHAR</button>
         </div>
     </div>
     
-    <!-- MODAL LOGIN -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <h2>🔐 Acessar Plataforma</h2>
-            <div style="margin: 20px 0;">
-                <input type="text" id="loginNome" placeholder="Seu nome ou apelido">
-                <input type="text" id="loginEscola" placeholder="Nome da sua escola (opcional)">
-                <button onclick="fazerLogin()" style="margin-top:10px; width:100%">▶️ ENTRAR GRATUITAMENTE</button>
-            </div>
-            <p style="font-size:0.8rem; color:#aaa;">✅ 100% gratuito - Sem necessidade de cadastro</p>
+            <input type="text" id="loginNome" placeholder="Seu nome">
+            <input type="text" id="loginEscola" placeholder="Nome da sua escola (opcional)">
+            <button onclick="fazerLogin()">▶️ ENTRAR GRATUITAMENTE</button>
+            <p style="font-size:0.8rem; margin-top:10px;">✅ 100% gratuito</p>
         </div>
     </div>
 
     <script>
-        // ========== CONFIGURAÇÃO INICIAL ==========
         let jogadorAtual = null;
         let dadosJogadores = JSON.parse(localStorage.getItem('eduplay_jogadores')) || {};
         let rankingGeral = JSON.parse(localStorage.getItem('eduplay_ranking')) || [];
         
-        // Ranking inicial
         if(rankingGeral.length === 0) {
             rankingGeral = [
-                { nome: "Ana Beatriz", escola: "EM São João", pontos: 2850, fase: "Nível 3", cidade: "São Paulo", estado: "SP" },
-                { nome: "João Pedro", escola: "Colégio Estadual", pontos: 2720, fase: "Nível 2", cidade: "Rio de Janeiro", estado: "RJ" },
-                { nome: "Maria Silva", escola: "Instituto Futuro", pontos: 2680, fase: "Modo Blitz", cidade: "Belo Horizonte", estado: "MG" },
-                { nome: "Carlos Santos", escola: "EM São João", pontos: 2450, fase: "Nível 1", cidade: "São Paulo", estado: "SP" }
+                { nome: "Ana Beatriz", escola: "EM São João", pontos: 2850 },
+                { nome: "João Pedro", escola: "Colégio Estadual", pontos: 2720 },
+                { nome: "Maria Silva", escola: "Instituto Futuro", pontos: 2680 }
             ];
             localStorage.setItem('eduplay_ranking', JSON.stringify(rankingGeral));
         }
         
-        // Conquistas
-        const conquistas = [
-            { id: 1, nome: "Primeira Vitória", icone: "🎯", descricao: "Complete sua primeira partida", condicao: (j) => (j.partidas || 0) >= 1 },
-            { id: 2, nome: "Matador de Dragões", icone: "🐉", descricao: "Zerar o Nível 3", condicao: (j) => (j.nivel3 || 0) >= 1 },
-            { id: 3, nome: "Velocidade Relâmpago", icone: "⚡", descricao: "Jogar no Modo Blitz", condicao: (j) => (j.modoBlitz || 0) >= 1 },
-            { id: 4, nome: "Mestre da Tabuada", icone: "🏆", descricao: "Acertar 100 questões", condicao: (j) => (j.totalAcertos || 0) >= 100 }
-        ];
-        
-        // Materiais
-        const materiais = [
-            { titulo: "Tabuada em PDF", autor: "Projeto EduPlay", tipo: "📄", downloads: 234 },
-            { titulo: "Jogo da Tabuada - Imprimir", autor: "Prof. Hilário", tipo: "🎲", downloads: 189 },
-            { titulo: "Dicas para aprender tabuada", autor: "Equipe EduPlay", tipo: "📝", downloads: 456 }
-        ];
-        
-        // ========== FUNÇÕES GERAIS ==========
         function mostrarPagina(pagina) {
             document.getElementById('pagina-jogos').style.display = pagina === 'jogos' ? 'block' : 'none';
             document.getElementById('pagina-ranking').style.display = pagina === 'ranking' ? 'block' : 'none';
             document.getElementById('pagina-conquistas').style.display = pagina === 'conquistas' ? 'block' : 'none';
             document.getElementById('pagina-biblioteca').style.display = pagina === 'biblioteca' ? 'block' : 'none';
             document.getElementById('jogo-container').style.display = 'none';
-            
             if(pagina === 'ranking') atualizarRanking();
-            if(pagina === 'conquistas') atualizarConquistas();
-            if(pagina === 'biblioteca') atualizarBiblioteca();
-            
             document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
             event.target.classList.add('active');
         }
         
-        function abrirLogin() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
+        function abrirLogin() { document.getElementById('loginModal').style.display = 'flex'; }
         
         function fazerLogin() {
             const nome = document.getElementById('loginNome').value.trim();
-            const escola = document.getElementById('loginEscola').value.trim();
-            
-            if(!nome) {
-                alert("Digite seu nome!");
-                return;
-            }
-            
-            if(!dadosJogadores[nome]) {
-                dadosJogadores[nome] = {
-                    nome: nome,
-                    escola: escola || "Não informada",
-                    partidas: 0,
-                    totalAcertos: 0,
-                    pontuacaoTotal: 0,
-                    nivel1: 0,
-                    nivel2: 0,
-                    nivel3: 0,
-                    modoBlitz: 0,
-                    melhorFase: "Nível 1"
-                };
-                localStorage.setItem('eduplay_jogadores', JSON.stringify(dadosJogadores));
-            }
-            
+            if(!nome) { alert("Digite seu nome!"); return; }
+            if(!dadosJogadores[nome]) dadosJogadores[nome] = { nome: nome, partidas: 0, acertos: 0, pontos: 0 };
             jogadorAtual = dadosJogadores[nome];
-            atualizarInterfaceUsuario();
+            document.getElementById('userName').innerHTML = nome;
             document.getElementById('loginModal').style.display = 'none';
-            alert(`🎉 Bem-vindo(a), ${nome}! Divirta-se aprendendo!`);
-        }
-        
-        function atualizarInterfaceUsuario() {
-            if(jogadorAtual) {
-                document.getElementById('userName').innerHTML = jogadorAtual.nome;
-                document.getElementById('totalPartidas').innerHTML = jogadorAtual.partidas || 0;
-                document.getElementById('totalAcertos').innerHTML = jogadorAtual.totalAcertos || 0;
-                const media = jogadorAtual.partidas ? Math.round((jogadorAtual.totalAcertos / (jogadorAtual.partidas * 5)) * 100) : 0;
-                document.getElementById('mediaAcertos').innerHTML = media;
-                document.getElementById('melhorFase').innerHTML = jogadorAtual.melhorFase || "Nível 1";
-                
-                let nivelIcone = "🌟";
-                if(media >= 90) nivelIcone = "💎";
-                else if(media >= 80) nivelIcone = "🏆";
-                else if(media >= 70) nivelIcone = "⭐";
-                document.getElementById('userLevel').innerHTML = nivelIcone;
-            }
-        }
-        
-        function salvarResultado(jogo, acertos, pontuacao, fase) {
-            if(!jogadorAtual) return;
-            
-            const j = dadosJogadores[jogadorAtual.nome];
-            j.partidas = (j.partidas || 0) + 1;
-            j.totalAcertos = (j.totalAcertos || 0) + acertos;
-            j.pontuacaoTotal = (j.pontuacaoTotal || 0) + pontuacao;
-            
-            if(fase === "Nível 1") j.nivel1 = (j.nivel1 || 0) + 1;
-            if(fase === "Nível 2") j.nivel2 = (j.nivel2 || 0) + 1;
-            if(fase === "Nível 3") j.nivel3 = (j.nivel3 || 0) + 1;
-            if(fase === "Modo Blitz") j.modoBlitz = (j.modoBlitz || 0) + 1;
-            
-            j.melhorFase = fase;
-            
-            localStorage.setItem('eduplay_jogadores', JSON.stringify(dadosJogadores));
-            jogadorAtual = j;
-            
-            // Atualizar ranking
-            const idx = rankingGeral.findIndex(r => r.nome === jogadorAtual.nome);
-            if(idx >= 0) {
-                rankingGeral[idx].pontos = j.pontuacaoTotal;
-                rankingGeral[idx].fase = j.melhorFase;
-            } else {
-                rankingGeral.push({
-                    nome: jogadorAtual.nome,
-                    escola: j.escola,
-                    pontos: j.pontuacaoTotal,
-                    fase: j.melhorFase,
-                    cidade: "Cidade",
-                    estado: "UF"
-                });
-            }
-            localStorage.setItem('eduplay_ranking', JSON.stringify(rankingGeral));
-            
-            atualizarInterfaceUsuario();
-            
-            alert(`🎉 Partida finalizada!\n✅ Acertos: ${acertos}\n⭐ Pontuação: ${pontuacao}\n🏆 Fase: ${fase}`);
+            alert(`Bem-vindo(a), ${nome}!`);
         }
         
         function atualizarRanking() {
             const body = document.getElementById('ranking-body');
-            const top10 = [...rankingGeral].sort((a,b) => b.pontos - a.pontos).slice(0,10);
-            body.innerHTML = top10.map((j, idx) => `
-                <tr><td style="color:${idx===0?'#f1c40f':idx===1?'#95a5a6':idx===2?'#cd7f32':'white'}">${idx+1}º</td>
-                    <td>${j.nome}</td>
-                    <td>${j.escola}</td>
-                    <td>${j.pontos}</td>
-                    <td>${j.fase}</td>
-                </tr>
+            body.innerHTML = rankingGeral.sort((a,b)=>b.pontos-a.pontos).slice(0,10).map((j,idx)=>`
+                <tr><td>${idx+1}º</td><td>${j.nome}</td><td>${j.escola}</td><td>${j.pontos}</td></tr>
             `).join('');
         }
         
         function filtrarRanking(tipo, btn) {
-            document.querySelectorAll('.rank-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.rank-tab').forEach(t=>t.classList.remove('active'));
             btn.classList.add('active');
             atualizarRanking();
         }
         
-        function atualizarConquistas() {
-            if(!jogadorAtual) return;
-            const grid = document.getElementById('badges-grid');
-            grid.innerHTML = conquistas.map(c => {
-                const obtida = c.condicao(jogadorAtual);
-                return `<div class="badge ${obtida ? 'obtido' : 'locked'}">
-                            <div class="badge-icon">${c.icone}</div>
-                            <div><strong>${c.nome}</strong></div>
-                            <div style="font-size:0.7rem;">${c.descricao}</div>
-                        </div>`;
-            }).join('');
-        }
-        
-        function atualizarBiblioteca() {
-            const grid = document.getElementById('materiais-grid');
-            grid.innerHTML = materiais.map(m => `
-                <div class="game-card" onclick="alert('📚 ${m.titulo}\n👤 Autor: ${m.autor}\n📥 ${m.downloads} downloads\n\nDisponível em breve!')">
-                    <div class="game-icon">${m.tipo}</div>
-                    <div class="game-title">${m.titulo}</div>
-                    <div class="game-info"><span>👤 ${m.autor}</span><span>📥 ${m.downloads}</span></div>
-                </div>
-            `).join('');
-        }
-        
-        // ========== FUNÇÕES DO JOGO ==========
         function abrirJogo(jogoId) {
-            if(!jogadorAtual) {
-                abrirLogin();
-                return;
-            }
-            
-            // Mostrar container do jogo
+            if(!jogadorAtual) { abrirLogin(); return; }
             document.getElementById('jogo-container').style.display = 'block';
             document.getElementById('pagina-jogos').style.display = 'none';
             document.getElementById('pagina-ranking').style.display = 'none';
             document.getElementById('pagina-conquistas').style.display = 'none';
             document.getElementById('pagina-biblioteca').style.display = 'none';
             
-            // Aqui você pode inserir diferentes jogos baseado no ID
-            if(jogoId === 'tabuada') {
-                carregarJogoTabuada();
-            } else if(jogoId === 'potencias') {
-                document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center; padding:50px;"><h3>⚔️ Batalha das Potências</h3><p>Em breve!</p></div>';
-            } else if(jogoId === 'equacoes') {
-                document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center; padding:50px;"><h3>🧮 Equações em Ação</h3><p>Em breve!</p></div>';
-            }
-        }
-        
-        function carregarJogoTabuada() {
-            // ============================================================
-            // ========== COLE O CÓDIGO COMPLETO DO SEU JOGO AQUI ==========
-            // ============================================================
-            
-            const jogoHTML = `
-                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-                <!-- >>> COLE O CÓDIGO DO JOGO "BATALHA DA TABUADA" AQUI >>> -->
-                <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-                
-                <div style="background: #0f3460; border-radius: 20px; padding: 20px; color: white;">
-                    <div style="display:flex; justify-content: space-between; margin-bottom: 20px;">
-                        <span id="jogo-avatar" style="font-size:2rem; background:#2c3e50; padding:5px 15px; border-radius:30px;">⚔️</span>
-                        <span id="jogo-timer" style="font-size:1.5rem; background:#2c3e50; padding:5px 15px; border-radius:30px;">--s</span>
-                    </div>
-                    <div style="width:100%; background:#eee; height:15px; border-radius:10px; overflow:hidden; margin-bottom:15px;">
-                        <div id="jogo-life-bar" style="width:100%; height:100%; background:#27ae60;"></div>
-                    </div>
-                    <div id="jogo-question" style="font-size:4rem; font-weight:bold; text-align:center; margin:20px 0;">? x ?</div>
-                    <input type="number" id="jogo-answer" class="game-input" style="font-size:2rem; text-align:center; padding:10px; border-radius:10px; border:none; width:100%; max-width:200px; margin:0 auto; display:block;" placeholder="?">
-                    <button onclick="verificarRespostaJogo()" style="background:#e94560; color:white; border:none; padding:15px; border-radius:15px; font-size:1.2rem; font-weight:bold; cursor:pointer; width:100%; margin-top:15px;">⚡ ATACAR!</button>
-                    <div style="display:flex; justify-content: space-between; margin-top:15px;">
-                        <span>🎯 Acertos: <span id="jogo-acertos">0</span></span>
-                        <span>⚔️ Fase: <span id="jogo-fase">Nível 1</span></span>
-                    </div>
-                </div>
-                
-                <script>
-                    let jogoAtivo = true;
-                    let jogoVida = 100;
-                    let jogoAcertos = 0;
-                    let jogoTentativas = 0;
-                    let jogoResposta = 0;
-                    let jogoCronometro;
-                    let jogoFaseAtual = 0;
-                    
-                    const fases = [
-                        {t: 10, d: 20, nome: "Nível 1"},
-                        {t: 8, d: 25, nome: "Nível 2"},
-                        {t: 6, d: 34, nome: "Nível 3"},
-                        {t: 60, d: 0, nome: "Modo Blitz"}
-                    ];
-                    
-                    function novaPerguntaJogo() {
-                        if(!jogoAtivo) return;
-                        let n1 = Math.floor(Math.random() * 8) + 2;
-                        let n2 = Math.floor(Math.random() * 8) + 2;
-                        jogoResposta = n1 * n2;
-                        document.getElementById('jogo-question').innerHTML = n1 + " × " + n2;
-                        document.getElementById('jogo-answer').value = "";
-                        document.getElementById('jogo-answer').focus();
-                        
-                        if(jogoFaseAtual !== 3) {
-                            clearInterval(jogoCronometro);
-                            let tempoRestante = fases[jogoFaseAtual].t;
-                            document.getElementById('jogo-timer').innerHTML = tempoRestante + "s";
-                            jogoCronometro = setInterval(() => {
-                                tempoRestante--;
-                                document.getElementById('jogo-timer').innerHTML = tempoRestante + "s";
-                                if(tempoRestante <= 0) {
-                                    clearInterval(jogoCronometro);
-                                    jogoVida -= fases[jogoFaseAtual].d;
-                                    atualizarVidaJogo();
-                                    if(jogoVida <= 0) finalizarJogo();
-                                    else novaPerguntaJogo();
-                                }
-                            }, 1000);
-                        }
-                    }
-                    
-                    function atualizarVidaJogo() {
-                        document.getElementById('jogo-life-bar').style.width = Math.max(0, jogoVida) + "%";
-                    }
-                    
-                    function verificarRespostaJogo() {
-                        let respostaUsuario = parseInt(document.getElementById('jogo-answer').value);
-                        if(isNaN(respostaUsuario)) return;
-                        
-                        jogoTentativas++;
-                        if(respostaUsuario === jogoResposta) {
-                            jogoAcertos++;
-                            document.getElementById('jogo-acertos').innerHTML = jogoAcertos;
-                            canvasConfetti({ particleCount: 50, spread: 50 });
-                        } else {
-                            if(jogoFaseAtual !== 3) jogoVida -= fases[jogoFaseAtual].d;
-                            atualizarVidaJogo();
-                        }
-                        
-                        if(jogoFaseAtual !== 3 && (jogoVida <= 0 || jogoTentativas >= 20)) {
-                            finalizarJogo();
-                        } else {
-                            novaPerguntaJogo();
-                        }
-                    }
-                    
-                    function finalizarJogo() {
-                        jogoAtivo = false;
-                        clearInterval(jogoCronometro);
-                        const eficiencia = Math.round((jogoAcertos / jogoTentativas) * 100) || 0;
-                        const nomeFase = fases[jogoFaseAtual].nome;
-                        const pontuacao = jogoAcertos * 10;
-                        
-                        if(jogoVida > 0 && jogoFaseAtual < 3) {
-                            jogoFaseAtual++;
-                            jogoVida = 100;
-                            jogoAcertos = 0;
-                            jogoTentativas = 0;
-                            document.getElementById('jogo-fase').innerHTML = fases[jogoFaseAtual].nome;
-                            document.getElementById('jogo-acertos').innerHTML = "0";
-                            atualizarVidaJogo();
-                            novaPerguntaJogo();
-                        } else {
-                            // Salvar resultado
-                            if(window.parent && window.parent.salvarResultado) {
-                                window.parent.salvarResultado('tabuada', jogoAcertos, pontuacao, nomeFase);
-                            }
-                            if(window.parent && window.parent.fecharJogo) {
-                                window.parent.fecharJogo();
-                            } else {
-                                alert(\`🎉 Partida finalizada!\\n✅ Acertos: \${jogoAcertos}\\n⭐ Pontuação: \${pontuacao}\\n🏆 Fase: \${nomeFase}\`);
-                                window.parent.document.getElementById('jogo-container').style.display = 'none';
-                                window.parent.mostrarPagina('jogos');
-                            }
-                        }
-                    }
-                    
-                    window.verificarRespostaJogo = verificarRespostaJogo;
-                    novaPerguntaJogo();
-                <\/script>
-            `;
-            
-            document.getElementById('game-embed-container').innerHTML = jogoHTML;
+            if(jogoId === '7ano') carregarJogo7ano();
+            else if(jogoId === 'tabuada') document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;"><h3>⚔️ Batalha da Tabuada</h3><p>Em breve!</p></div>';
+            else document.getElementById('game-embed-container').innerHTML = '<div style="text-align:center;padding:50px;"><h3>📚 Em desenvolvimento</h3><p>Em breve!</p></div>';
         }
         
         function fecharJogo() {
@@ -1202,26 +498,176 @@
             mostrarPagina('jogos');
         }
         
-        // ========== DOAÇÃO ==========
-        let pixConfig = JSON.parse(localStorage.getItem('pixConfigEduPlay')) || { tipo: "Email", chave: "eduplay@plataforma.com", nome: "Projeto EduPlay" };
-        
-        function abrirDoacao() {
-            document.getElementById('pixChaveDisplay').innerHTML = `${pixConfig.tipo}: ${pixConfig.chave}<br>(${pixConfig.nome})`;
-            document.getElementById('doacaoModal').style.display = 'flex';
+        function carregarJogo7ano() {
+            document.getElementById('game-embed-container').innerHTML = `
+            <div style="background: white; border-radius: 30px; padding: 25px; text-align: center;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <div style="background: #2c3e50; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="levelDisplay7">📚 Nível 1</div>
+                    <div style="background: #f1c40f; color: #333; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="scoreDisplay7">⭐ 0 pts</div>
+                    <div style="background: #e74c3c; color: white; padding: 8px 15px; border-radius: 25px; font-weight: bold;" id="streakDisplay7">🔥 0</div>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <div style="width: 100%; height: 10px; background: #eee; border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; background: #27ae60; width: 0%;" id="progressFill7"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: #666;" id="progressText7">Questão 1 de 10</div>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;" id="livesContainer7">❤️ ❤️ ❤️</div>
+                <div style="background: #f8f9fa; border-radius: 20px; padding: 25px; margin-bottom: 20px;">
+                    <div style="font-size: 1.2rem; color: #333; margin-bottom: 20px; font-weight: 600;" id="questionText7">Carregando...</div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;" id="optionsContainer7"></div>
+                </div>
+                <button style="background: #27ae60; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" id="nextBtn7" disabled>▶ PRÓXIMA</button>
+                <button style="background: #3498db; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px;" onclick="if(window.reiniciarJogo7) reiniciarJogo7()">🔄 RECOMEÇAR JOGO</button>
+            </div>
+            <script>
+                const bancoQuestoes7 = {
+                    1: [
+                        { texto: "O resultado de (-8) + (-12) é:", a: "-20", b: "-4", c: "4", d: "20", correta: "a" },
+                        { texto: "Qual é o valor de (-3) × (-7)?", a: "-21", b: "-10", c: "10", d: "21", correta: "d" },
+                        { texto: "Resolva a expressão: 5 - 2 × 3 = ?", a: "-1", b: "1", c: "3", d: "9", correta: "a" },
+                        { texto: "O resultado de (-15) ÷ (+3) é:", a: "-5", b: "-3", c: "3", d: "5", correta: "a" },
+                        { texto: "Qual é o valor absoluto de |-9|?", a: "-9", b: "0", c: "9", d: "18", correta: "c" }
+                    ],
+                    2: [
+                        { texto: "Resolva a equação: 3x + 7 = 22", a: "3", b: "4", c: "5", d: "6", correta: "c" },
+                        { texto: "Se 2x - 5 = 9, então x vale:", a: "5", b: "6", c: "7", d: "8", correta: "c" },
+                        { texto: "Qual é a raiz da equação 5x = 45?", a: "7", b: "8", c: "9", d: "10", correta: "c" }
+                    ],
+                    3: [
+                        { texto: "A forma decimal de 3/8 é:", a: "0,25", b: "0,3", c: "0,325", d: "0,375", correta: "d" },
+                        { texto: "25% de 120 é igual a:", a: "20", b: "25", c: "30", d: "35", correta: "c" },
+                        { texto: "A fração 3/5 corresponde a qual porcentagem?", a: "30%", b: "45%", c: "60%", d: "75%", correta: "c" }
+                    ]
+                };
+                
+                for(let n = 4; n <= 10; n++) {
+                    bancoQuestoes7[n] = [];
+                    for(let i = 1; i <= 10; i++) {
+                        bancoQuestoes7[n].push({
+                            texto: `Desafio ${i} do Nível ${n}`,
+                            a: "Opção A", b: "Opção B", c: "Opção C", d: "Opção D",
+                            correta: ["a","b","c","d"][Math.floor(Math.random() * 4)]
+                        });
+                    }
+                }
+                
+                function embaralhar7(array) {
+                    for(let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+                
+                let nivelAtual7 = 1, questoesNivel7 = [], indiceQuestao7 = 0, pontuacao7 = 0, sequencia7 = 0, vidas7 = 3;
+                let alternativaSelecionada7 = null, processando7 = false, acertosNivel7 = 0;
+                
+                function carregarNivel7(nivel) {
+                    nivelAtual7 = nivel;
+                    acertosNivel7 = 0;
+                    let banco = bancoQuestoes7[nivel] || [];
+                    questoesNivel7 = embaralhar7([...banco]).slice(0, 10);
+                    indiceQuestao7 = 0;
+                    vidas7 = 3;
+                    sequencia7 = 0;
+                    carregarQuestao7();
+                }
+                
+                function carregarQuestao7() {
+                    if(indiceQuestao7 >= questoesNivel7.length) {
+                        if(nivelAtual7 < 10) carregarNivel7(nivelAtual7 + 1);
+                        else finalizarJogo7(true);
+                        return;
+                    }
+                    const q = questoesNivel7[indiceQuestao7];
+                    document.getElementById('questionText7').innerHTML = q.texto;
+                    document.getElementById('optionsContainer7').innerHTML = `
+                        <div class="option" data-letra="a" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
+                            <div style="flex:1; text-align:left; color:#333;">${q.a}</div>
+                        </div>
+                        <div class="option" data-letra="b" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">B</div>
+                            <div style="flex:1; text-align:left; color:#333;">${q.b}</div>
+                        </div>
+                        <div class="option" data-letra="c" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">C</div>
+                            <div style="flex:1; text-align:left; color:#333;">${q.c}</div>
+                        </div>
+                        <div class="option" data-letra="d" style="background: white; border: 2px solid #ddd; border-radius: 15px; padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 40px; height: 40px; background: #2c3e50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">D</div>
+                            <div style="flex:1; text-align:left; color:#333;">${q.d}</div>
+                        </div>
+                    `;
+                    document.querySelectorAll('#optionsContainer7 .option').forEach(opt => {
+                        opt.onclick = () => {
+                            if(processando7) return;
+                            if(alternativaSelecionada7) alternativaSelecionada7.classList.remove('selected');
+                            alternativaSelecionada7 = opt;
+                            opt.classList.add('selected');
+                            document.getElementById('nextBtn7').disabled = false;
+                        };
+                    });
+                    alternativaSelecionada7 = null;
+                    processando7 = false;
+                    document.getElementById('nextBtn7').disabled = true;
+                    const progresso = (indiceQuestao7 / questoesNivel7.length) * 100;
+                    document.getElementById('progressFill7').style.width = progresso + "%";
+                    document.getElementById('progressText7').innerHTML = `Questão ${indiceQuestao7 + 1} de ${questoesNivel7.length}`;
+                    document.getElementById('levelDisplay7').innerHTML = `📚 Nível ${nivelAtual7}`;
+                    document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
+                    document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
+                }
+                
+                function atualizarVidas7() {
+                    let hearts = '';
+                    for(let i = 0; i < 3; i++) hearts += `<span style="font-size:1.8rem;">${i < vidas7 ? '❤️' : '🖤'}</span>`;
+                    document.getElementById('livesContainer7').innerHTML = hearts;
+                }
+                
+                window.proximaQuestao7 = function() {
+                    if(processando7 || !alternativaSelecionada7) return;
+                    processando7 = true;
+                    const q = questoesNivel7[indiceQuestao7];
+                    const letraSelecionada = alternativaSelecionada7.getAttribute('data-letra');
+                    const acertou = (letraSelecionada === q.correta);
+                    document.querySelectorAll('#optionsContainer7 .option').forEach(opt => opt.classList.add('disabled'));
+                    if(acertou) {
+                        acertosNivel7++;
+                        sequencia7++;
+                        pontuacao7 += 10 + (sequencia7 * 2);
+                        canvasConfetti({ particleCount: 50, spread: 60 });
+                    } else {
+                        sequencia7 = 0;
+                        vidas7--;
+                        atualizarVidas7();
+                        if(vidas7 <= 0) { setTimeout(() => finalizarJogo7(false), 2000); return; }
+                    }
+                    document.getElementById('scoreDisplay7').innerHTML = `⭐ ${pontuacao7} pts`;
+                    document.getElementById('streakDisplay7').innerHTML = `🔥 ${sequencia7}`;
+                    setTimeout(() => { indiceQuestao7++; processando7 = false; carregarQuestao7(); }, 1500);
+                };
+                
+                function finalizarJogo7(completou) {
+                    if(completou) alert(`🎉 PARABÉNS! Pontuação: ${pontuacao7}`);
+                    else alert(`💀 GAME OVER! Pontuação: ${pontuacao7}`);
+                    if(window.parent && window.parent.fecharJogo) window.parent.fecharJogo();
+                    else location.reload();
+                }
+                
+                window.reiniciarJogo7 = function() { nivelAtual7 = 1; pontuacao7 = 0; carregarNivel7(1); };
+                document.getElementById('nextBtn7').onclick = () => window.proximaQuestao7();
+                carregarNivel7(1);
+            <\/script>
+            `;
         }
         
-        function fecharDoacao() {
-            document.getElementById('doacaoModal').style.display = 'none';
-        }
+        function abrirDoacao() { document.getElementById('doacaoModal').style.display = 'flex'; }
+        function fecharDoacao() { document.getElementById('doacaoModal').style.display = 'none'; }
+        function copiarPix() { navigator.clipboard.writeText("eduplay@plataforma.com"); alert("Chave PIX copiada!"); }
         
-        function copiarPix() {
-            navigator.clipboard.writeText(pixConfig.chave);
-            alert("Chave PIX copiada! ✅");
-        }
-        
-        window.onload = () => {
-            mostrarPagina('jogos');
-        };
+        window.onload = () => { mostrarPagina('jogos'); };
     </script>
 </body>
 </html>
